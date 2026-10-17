@@ -50,49 +50,74 @@
   qsa('a', nav).forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
   doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); } });
 
-  /* ---------- hero slider ---------- */
-  /* The current dot's ring fills over 6.5 s in CSS; its animationend advances the slide.
-     Pausing the ring (hover, focus) pauses the slider, and reduced motion has no ring, so no autoplay. */
-  var slides = qsa('[data-slide]'), dots = qsa('[data-dot]'), current = 0;
-  function show(i) {
-    current = (i + slides.length) % slides.length;
-    slides.forEach(function (s, n) { s.classList.toggle('is-active', n === current); s.setAttribute('aria-hidden', n === current ? 'false' : 'true'); });
-    dots.forEach(function (d, n) { d.setAttribute('aria-current', n === current ? 'true' : 'false'); });
+  /* ---------- the pack: sticker dogs with name tags ---------- */
+  /* The ring on the pause button fills over 6.5 s in CSS; its animationend moves on to the next dog.
+     Hovering or focusing the pack, or the pause button, holds it. Reduced motion has no ring, so no autoplay. */
+  var pack = qs('.pack'), pups = qsa('[data-pup]'), bgs = qsa('[data-bg]');
+  var ring = qs('.pause-ring'), countEl = qs('[data-count]'), live = qs('[data-live]');
+  var current = 0;
+  function load(i) {
+    var img = qs('.pup-img', pups[i]);
+    if (img && img.getAttribute('data-src')) { img.src = img.getAttribute('data-src'); img.removeAttribute('data-src'); }
+  }
+  function restartRing() {
+    if (!ring) return;
+    ring.classList.remove('run'); void ring.offsetWidth;
+    if (!calm()) ring.classList.add('run');
+  }
+  function show(i, dir, announce) {
+    var next = (i + pups.length) % pups.length;
+    if (next === current) { restartRing(); return; }
+    dir = dir || (next > current ? 1 : -1);
+    var old = pups[current], neu = pups[next];
+    load(next); load((next + 1) % pups.length);
+    old.style.setProperty('--from', -dir);
+    old.classList.remove('is-active'); old.setAttribute('aria-hidden', 'true');
+    neu.style.transition = 'none'; neu.style.setProperty('--from', dir); void neu.offsetWidth; neu.style.transition = '';
+    neu.classList.add('is-active'); neu.removeAttribute('aria-hidden');
+    bgs.forEach(function (b, n) { b.classList.toggle('is-active', n === next); });
+    current = next;
+    if (countEl) countEl.textContent = (next + 1 < 10 ? '0' : '') + (next + 1);
+    if (live && announce) live.textContent = neu.getAttribute('aria-label');
+    restartRing();
   }
   var hovering = false, focused = false, userPaused = false;
   var pauseBtn = qs('.pause');
   function syncPause() { if (hero) hero.classList.toggle('is-paused', hovering || focused || userPaused); }
-  function play() { hovering = false; focused = false; syncPause(); }
-  function stop() { syncPause(); }
   if (pauseBtn) {
     pauseBtn.setAttribute('aria-pressed', 'false');
     pauseBtn.hidden = calm();
     pauseBtn.addEventListener('click', function () {
       userPaused = !userPaused;
       pauseBtn.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
-      pauseBtn.setAttribute('aria-label', userPaused ? 'Play the photos' : 'Pause the photos');
+      pauseBtn.setAttribute('aria-label', userPaused ? 'Play the dogs' : 'Pause the dogs');
       syncPause();
     });
   }
-  dots.forEach(function (d) {
-    d.addEventListener('animationend', function (e) { if (e.animationName === 'ring' && d.getAttribute('aria-current') === 'true') show(current + 1); });
-    d.addEventListener('click', function () { show(+d.getAttribute('data-dot')); });
+  if (ring) ring.addEventListener('animationend', function (e) { if (e.animationName === 'ring') show(current + 1, 1); });
+  qsa('[data-step]').forEach(function (b) {
+    b.addEventListener('click', function () { var s = +b.getAttribute('data-step'); show(current + s, s, true); });
   });
-  if (hero) {
-    hero.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hovering = true; syncPause(); } });
-    hero.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { hovering = false; syncPause(); } });
-    hero.addEventListener('focusin', function () { focused = true; syncPause(); });
-    hero.addEventListener('focusout', function (e) { if (!hero.contains(e.relatedTarget)) { focused = false; syncPause(); } });
+  if (pack) {
+    pack.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hovering = true; syncPause(); } });
+    pack.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { hovering = false; syncPause(); } });
+    pack.addEventListener('focusin', function () { focused = true; syncPause(); });
+    pack.addEventListener('focusout', function (e) { if (!pack.contains(e.relatedTarget)) { focused = false; syncPause(); } });
+    pack.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1, 1, true); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1, -1, true); }
+    });
     var x0 = null;
-    hero.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
-    hero.addEventListener('touchend', function (e) {
+    pack.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    pack.addEventListener('touchend', function (e) {
       if (x0 === null) return;
       var dx = e.changedTouches[0].clientX - x0; x0 = null;
-      if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1, true);
     }, { passive: true });
   }
-  var pick = location.search.match(/[?&]slide=(\d)/);
-  show(pick ? +pick[1] - 1 : 0);
+  load(1);
+  var pick = location.search.match(/[?&]slide=(\d+)/);
+  if (pick) show(+pick[1] - 1); else restartRing();
 
   /* hero circles lean a little toward the pointer (desktop, fine pointer) */
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -227,8 +252,7 @@
     if (calm()) return;
     var y = window.scrollY, h = hero.offsetHeight;
     if (y > h) return;
-    var dog = qs('.slide.is-active .slide-dog');
-    if (dog) dog.style.translate = '0 ' + (y * 0.18).toFixed(1) + 'px';
+    if (pack) pack.style.translate = '0 ' + (y * 0.16).toFixed(1) + 'px';
     heroCopy.style.transform = 'translateY(' + (y * -0.08).toFixed(1) + 'px)';
     heroCopy.style.opacity = String(Math.max(0, 1 - y / (h * 0.8)));
   }
