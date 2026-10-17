@@ -253,7 +253,7 @@
   if (!calm()) {
     qsa('[data-bubbles]').forEach(function (sec) {
       var phone = window.innerWidth < 900;
-      var n = sec.id === 'hero' ? (phone ? 10 : 16) : (phone ? 6 : 10);
+      var n = sec.id === 'hero' ? (phone ? 4 : 6) : (phone ? 3 : 4);
       var box = doc.createElement('div');
       box.className = 'bubbles bubbles--' + sec.getAttribute('data-bubbles');
       box.setAttribute('aria-hidden', 'true');
@@ -301,7 +301,7 @@
   if (env) {
     var small = vw < 900;
     var toolMix = ['snips', 'comb', 'snips', 'clippers', 'brush', 'snips', 'comb', 'clippers', 'brush', 'snips', 'comb', 'brush'];
-    var nSoap = small ? 4 : 7, nTool = small ? 7 : 12, html = '';
+    var nSoap = small ? 2 : 4, nTool = small ? 7 : 12, html = '';
     for (var a = 0; a < nSoap + nTool; a++) {
       var isSoap = a < nSoap, name = isSoap ? '' : toolMix[(a - nSoap) % toolMix.length];
       var side = a % 2 === 0 ? rnd(-0.08, 0.1) : rnd(0.9, 1.06);
@@ -316,7 +316,7 @@
           (name === 'snips' ? SNIPS : '<svg><use href="#ic-' + name + '"/></svg>') + '</div>') + '</div>';
     }
     var rise = '';
-    for (var b = 0; b < (small ? 5 : 8); b++) {
+    for (var b = 0; b < (small ? 3 : 4); b++) {
       var bs = Math.round(8 + Math.pow(Math.random(), 2) * 40);
       rise += '<span class="bub" style="--x:' + (Math.random() * 96).toFixed(1) + '%;--s:' + bs + 'px;--d:' + rnd(12, 26).toFixed(1) +
         's;--delay:-' + rnd(0, 24).toFixed(1) + 's;--sw:' + rnd(2.6, 5).toFixed(1) + 's;--amp:' + Math.round(rnd(8, 30)) + 'px"><i></i></span>';
@@ -357,6 +357,46 @@
     if (env) env.classList.toggle('is-fast', !still && Math.abs(vel) > 5);
   }
 
+  /* ---------- grooming tools in the hero too ----------
+     A few tools and fur tufts sit in the hero's open spaces: the edges and the gap between the dog
+     and the words. They bob and snip like the ones behind the page, lean with the mouse and spin
+     with scroll speed. */
+  var heroTools = [];
+  if (hero) {
+    var hsm = vw < 900;
+    var spots = hsm
+      ? [[0.9, 0.64, 'snips'], [0.07, 0.7, 'comb'], [0.91, 0.86, 'clippers'], [0.08, 0.9, 'snips']]
+      : [[0.44, 0.16, 'snips'], [0.03, 0.5, 'comb'], [0.45, 0.72, 'clippers'], [0.96, 0.3, 'brush'], [0.95, 0.6, 'snips']];
+    var hhtml = '';
+    spots.forEach(function (p) {
+      var sz = Math.round(p[2] === 'snips' ? rnd(hsm ? 46 : 70, hsm ? 58 : 96) : rnd(hsm ? 38 : 56, hsm ? 50 : 80));
+      hhtml += '<div class="hero-tool" style="left:' + (p[0] * 100).toFixed(1) + '%;top:' + (p[1] * 100).toFixed(1) + '%"><div class="tool" style="--s:' + sz +
+        'px;--w:' + rnd(5, 9).toFixed(1) + 's;--snip:' + rnd(1.1, 1.8).toFixed(2) + 's">' + (p[2] === 'snips' ? SNIPS : '<svg><use href="#ic-' + p[2] + '"/></svg>') + '</div></div>';
+    });
+    var hfall = '';
+    for (var hf = 0; hf < (hsm ? 4 : 6); hf++) {
+      hfall += '<span class="fur" style="--x:' + (Math.random() * 96).toFixed(1) + '%;--s:' + Math.round(rnd(22, 40)) + 'px;--d:' + rnd(8, 14).toFixed(1) +
+        's;--delay:-' + rnd(0, 14).toFixed(1) + 's;--tw:' + rnd(2, 4).toFixed(1) + 's;--dx:' + Math.round(rnd(-50, 50)) + 'px;--o:' + rnd(0.35, 0.6).toFixed(2) +
+        ';color:' + (hf % 2 ? 'var(--gold)' : 'var(--lilac)') + '"><svg viewBox="0 0 24 24">' + FUR[hf % FUR.length] + '</svg></span>';
+    }
+    var heroField = doc.createElement('div');
+    heroField.className = 'hero-field';
+    heroField.setAttribute('aria-hidden', 'true');
+    heroField.innerHTML = hhtml + '<div class="hero-fall">' + hfall + '</div>';
+    var heroOrbsEl = qs('.orbs', hero);
+    hero.insertBefore(heroField, heroOrbsEl ? heroOrbsEl.nextSibling : hero.firstChild);
+    var heroFall = qs('.hero-fall', heroField);
+    heroFall.style.setProperty('--fall', (hero.offsetHeight + 100) + 'px');
+    qsa('.hero-tool', heroField).forEach(function (el) { heroTools.push({ el: el, rot: rnd(-30, 30), k: rnd(0.5, 1) }); });
+  }
+  function placeHeroTools(isStill) {
+    var spin = isStill ? 0 : Math.max(-28, Math.min(28, vel * 0.7));
+    heroTools.forEach(function (t) {
+      t.el.style.rotate = (t.rot + spin).toFixed(1) + 'deg';
+      t.el.style.translate = 'calc(-50% + ' + (mouse.x * t.k * 40).toFixed(1) + 'px) calc(-50% + ' + (mouse.y * t.k * 30).toFixed(1) + 'px)';
+    });
+  }
+
   /* ---------- the hero and booking circles answer the scroll too ---------- */
   var depthSet = [0.34, -0.22, 0.5, -0.38, 0.2, -0.3, 0.42];
   var orbList = qsa('.orbs i').map(function (o, i) {
@@ -373,6 +413,7 @@
     mouse.x += (mouse.tx - mouse.x) * 0.07;
     mouse.y += (mouse.ty - mouse.y) * 0.07;
     placeEnv(y, false);
+    placeHeroTools(false);
     var push = Math.max(-80, Math.min(80, vel * 2.4));
     var stretch = Math.min(Math.abs(vel) * 0.009, 0.24);
     var seen = [];

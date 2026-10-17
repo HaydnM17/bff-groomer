@@ -191,6 +191,11 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
 }
 .orbs i:nth-child(2n) { animation-direction: alternate-reverse; }
 
+/* grooming tools and fur in the hero, under the words and the dogs */
+.hero-field { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.hero-tool { position: absolute; translate: -50% -50%; }
+.hero-tool .tool { color: var(--lilac); opacity: .36; }
+.hero-fall { position: absolute; inset: 0; }
 .hero-copy {
   position: relative; z-index: 3;
   padding: 104px var(--pad) 0;
@@ -777,7 +782,7 @@ main { position: relative; }
 .still [data-enter], .still [data-reveal], .still .g-track li, .still [data-words] .w > span,
 .still .sec-head .laurel, .still .svc, .still .book-dog, .still .nav li { opacity: 1 !important; transform: none !important; translate: none !important; clip-path: none !important; transition: none !important; }
 .still .svc-disc img { opacity: 1 !important; transform: translateX(-50%) !important; transition: none !important; }
-.still .env *, .still .bubbles, .still .orbs i, .still .scroll-cue svg, .still .review, .still .pup-rock, .still .tag, .still .pause-ring, .still .contact-pup, .still .booking-dot::after { animation: none !important; }
+.still .env *, .still .hero-field *, .still .bubbles, .still .orbs i, .still .scroll-cue svg, .still .review, .still .pup-rock, .still .tag, .still .pause-ring, .still .contact-pup, .still .booking-dot::after { animation: none !important; }
 .still .pack-stage { opacity: 1 !important; translate: none !important; transition: none !important; }
 .still .pup, .still .slide-bg, .still .tag { transition: none !important; }
 @media (prefers-reduced-motion: reduce) {
@@ -790,6 +795,6 @@ main { position: relative; }
   .tag { scale: 1 !important; transition: opacity .3s ease !important; }
   .slide-bg { transform: none !important; transition: opacity .3s ease !important; }
   .photo, .review, .svc-disc img { transition: none !important; }
-  .btn::after, .pause, .bubbles, .env-rise, .env-fall { display: none; }
+  .btn::after, .pause, .bubbles, .env-rise, .env-fall, .hero-fall { display: none; }
   .soap, .soap > i, .tool, .snips .blade { animation: none !important; }
 }
