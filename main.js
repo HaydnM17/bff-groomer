@@ -258,6 +258,137 @@
   }
   window.addEventListener('scroll', function () { requestAnimationFrame(parallax); }, { passive: true });
 
+  /* ---------- soap bubbles: a handful rising through every [data-bubbles] section ---------- */
+  var bubbleSets = [];
+  if (!calm()) {
+    qsa('[data-bubbles]').forEach(function (sec) {
+      var phone = window.innerWidth < 900;
+      var n = sec.id === 'hero' ? (phone ? 10 : 16) : (phone ? 6 : 10);
+      var box = doc.createElement('div');
+      box.className = 'bubbles bubbles--' + sec.getAttribute('data-bubbles');
+      box.setAttribute('aria-hidden', 'true');
+      var html = '';
+      for (var k = 0; k < n; k++) {
+        var s = Math.round(8 + Math.pow(Math.random(), 2) * 46);
+        html += '<span class="bub" style="--x:' + (Math.random() * 96).toFixed(1) + '%;--s:' + s + 'px;--d:' + (11 + Math.random() * 14).toFixed(1) +
+          's;--delay:-' + (Math.random() * 22).toFixed(1) + 's;--sw:' + (2.6 + Math.random() * 2.4).toFixed(1) + 's;--amp:' + Math.round(8 + Math.random() * 22) + 'px"><i></i></span>';
+      }
+      box.innerHTML = html;
+      var orbsEl = qs('.orbs', sec);
+      // above the section ground and its circles, under the content
+      if (orbsEl) orbsEl.parentNode.insertBefore(box, orbsEl.nextSibling); else sec.insertBefore(box, sec.firstChild);
+      bubbleSets.push({ sec: sec, box: box });
+    });
+    var sizeBubbles = function () { bubbleSets.forEach(function (b) { b.box.style.setProperty('--travel', -(b.sec.offsetHeight + 180) + 'px'); }); };
+    sizeBubbles();
+    window.addEventListener('resize', sizeBubbles);
+    if ('IntersectionObserver' in window) {
+      var bubbleIO = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { bubbleSets.forEach(function (b) { if (b.sec === e.target) b.box.classList.toggle('is-off', !e.isIntersecting); }); });
+      }, { rootMargin: '200px 0px' });
+      bubbleSets.forEach(function (b) { bubbleIO.observe(b.sec); });
+    }
+  }
+
+  /* ---------- the bubble world behind the page ----------
+     Big soap bubbles and grooming tools sit along the edges, each at its own depth. Scrolling carries
+     them past at their own speeds and wraps them round, fast scrolling stretches the bubbles and spins
+     the tools, and the mouse leans the whole field. Small bubbles rise through the middle. */
+  var env = qs('.env'), envItems = [], envRise = null;
+  var mouse = { tx: 0, ty: 0, x: 0, y: 0 };
+  var vw = window.innerWidth, vh = window.innerHeight;
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  if (env) {
+    var small = vw < 900;
+    var toolNames = ['scissors', 'comb', 'brush', 'clippers', 'bone', 'paw'];
+    var nSoap = small ? 8 : 14, nTool = small ? 6 : 10, html = '';
+    for (var a = 0; a < nSoap + nTool; a++) {
+      var isSoap = a < nSoap;
+      var side = a % 2 === 0 ? rnd(-0.1, 0.09) : rnd(0.9, 1.08);
+      if (isSoap && a % 4 === 3) side = rnd(0.25, 0.75); // a few bubbles drift across the open sections; tools stay at the edges
+      var s = isSoap ? Math.round(rnd(small ? 70 : 110, small ? 190 : 330)) : Math.round(rnd(small ? 34 : 44, small ? 52 : 74));
+      envItems.push({ soap: isSoap, s: s, x: side, y0: rnd(0, 1), k: isSoap ? rnd(0.12, 0.38) : rnd(0.45, 0.8), rot: rnd(-35, 35) });
+      html += '<div class="env-item">' + (isSoap
+        ? '<div class="soap" style="--s:' + s + 'px;--w:' + rnd(7, 12).toFixed(1) + 's"><i></i></div>'
+        : '<div class="tool" style="--s:' + s + 'px;--w:' + rnd(5, 9).toFixed(1) + 's"><svg><use href="#ic-' + toolNames[a % toolNames.length] + '"/></svg></div>') + '</div>';
+    }
+    var rise = '';
+    for (var b = 0; b < (small ? 9 : 16); b++) {
+      var bs = Math.round(8 + Math.pow(Math.random(), 2) * 40);
+      rise += '<span class="bub" style="--x:' + (Math.random() * 96).toFixed(1) + '%;--s:' + bs + 'px;--d:' + rnd(12, 26).toFixed(1) +
+        's;--delay:-' + rnd(0, 24).toFixed(1) + 's;--sw:' + rnd(2.6, 5).toFixed(1) + 's;--amp:' + Math.round(rnd(8, 30)) + 'px"><i></i></span>';
+    }
+    env.innerHTML = html + '<div class="env-rise bubbles--light">' + rise + '</div>';
+    qsa('.env-item', env).forEach(function (el, i) { envItems[i].el = el; });
+    envRise = qs('.env-rise', env);
+  }
+  function placeEnv(y, still) {
+    var stretch = still ? 0 : Math.min(Math.abs(vel) * 0.01, 0.26);
+    var spin = still ? 0 : Math.max(-28, Math.min(28, vel * 0.7));
+    envItems.forEach(function (it) {
+      var span = vh + it.s * 2 + 120;
+      var py = ((it.y0 * span - y * it.k) % span + span) % span - it.s - 60;
+      var px = it.x * vw - it.s / 2 + mouse.x * it.k * 90;
+      py += mouse.y * it.k * 60;
+      it.el.style.translate = px.toFixed(1) + 'px ' + py.toFixed(1) + 'px';
+      if (it.soap) it.el.style.scale = (1 - stretch * 0.4).toFixed(3) + ' ' + (1 + stretch).toFixed(3);
+      else it.el.style.rotate = (it.rot + spin).toFixed(1) + 'deg';
+    });
+    if (envRise) {
+      envRise.style.setProperty('--travel', -(vh + 160) + 'px');
+      envRise.style.translate = '0 ' + (still ? 0 : Math.max(-90, Math.min(90, vel * 2.6))).toFixed(1) + 'px';
+    }
+  }
+
+  /* ---------- the hero and booking circles answer the scroll too ---------- */
+  var depthSet = [0.34, -0.22, 0.5, -0.38, 0.2, -0.3, 0.42];
+  var orbList = qsa('.orbs i').map(function (o, i) {
+    return { el: o, sec: o.closest('section') || o.parentNode, k: depthSet[i % depthSet.length] };
+  });
+  var heroBg = qs('.hero-slides');
+  var lastY = window.scrollY, vel = 0, sraf = null;
+  function react() {
+    sraf = null;
+    var y = window.scrollY, v = y - lastY;
+    lastY = y;
+    if (calm()) { vel = 0; placeEnv(y, true); return; }
+    vel += (v - vel) * 0.2;
+    mouse.x += (mouse.tx - mouse.x) * 0.07;
+    mouse.y += (mouse.ty - mouse.y) * 0.07;
+    placeEnv(y, false);
+    var push = Math.max(-80, Math.min(80, vel * 2.4));
+    var stretch = Math.min(Math.abs(vel) * 0.009, 0.24);
+    var seen = [];
+    orbList.forEach(function (o) {
+      var hit = null;
+      for (var i = 0; i < seen.length; i++) if (seen[i].s === o.sec) { hit = seen[i].r; break; }
+      if (!hit) { hit = o.sec.getBoundingClientRect(); seen.push({ s: o.sec, r: hit }); }
+      if (hit.bottom < -150 || hit.top > vh + 150) return;
+      var off = (hit.top + hit.height / 2 - vh / 2) * o.k;
+      o.el.style.translate = '0 ' + (off + push * o.k * 2.2).toFixed(1) + 'px';
+      o.el.style.scale = (1 - stretch * 0.45).toFixed(3) + ' ' + (1 + stretch).toFixed(3);
+    });
+    bubbleSets.forEach(function (bs) { bs.box.style.translate = '0 ' + push.toFixed(1) + 'px'; });
+    if (heroBg && hero) {
+      var p = Math.min(1, y / hero.offsetHeight);
+      heroBg.style.scale = (1 + p * 0.18).toFixed(3);
+      heroBg.style.translate = '0 ' + (p * 60).toFixed(1) + 'px';
+    }
+    var moving = Math.abs(vel) > 0.06 || v !== 0 || Math.abs(mouse.tx - mouse.x) > 0.002 || Math.abs(mouse.ty - mouse.y) > 0.002;
+    if (moving) sraf = requestAnimationFrame(react);
+  }
+  function kick() { if (!sraf) sraf = requestAnimationFrame(react); }
+  window.addEventListener('scroll', kick, { passive: true });
+  window.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse') return;
+    mouse.tx = e.clientX / vw - 0.5;
+    mouse.ty = e.clientY / vh - 0.5;
+    kick();
+  }, { passive: true });
+  window.addEventListener('resize', function () { vw = window.innerWidth; vh = window.innerHeight; placeEnv(window.scrollY, calm()); kick(); });
+  placeEnv(window.scrollY, calm());
+  react();
+
   /* ---------- contact form (preview only) ---------- */
   var form = doc.getElementById('contact-form');
   if (form) {
@@ -296,6 +427,10 @@
       revealTargets.forEach(land);
       deep.forEach(function (el) { el.style.translate = ''; });
       if (heroOrbs) heroOrbs.style.translate = '';
+      orbList.forEach(function (o) { o.el.style.translate = ''; o.el.style.scale = ''; });
+      bubbleSets.forEach(function (b) { b.box.style.translate = ''; });
+      if (heroBg) { heroBg.style.scale = ''; heroBg.style.translate = ''; }
+      placeEnv(window.scrollY, true);
     }
   };
   if (rm.addEventListener) rm.addEventListener('change', onRm); else if (rm.addListener) rm.addListener(onRm);

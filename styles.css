@@ -30,7 +30,7 @@
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 72px; }
 body {
   margin: 0;
-  background: var(--mist);
+  background: linear-gradient(180deg, #EFE5FF 0%, #E6D8FF 45%, #F2EAFF 100%) fixed var(--mist);
   color: var(--ink);
   font: 400 1.0625rem/1.6 var(--body);
   -webkit-font-smoothing: antialiased;
@@ -167,16 +167,18 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
   position: absolute; border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, rgba(214, 190, 255, .42), rgba(192, 154, 255, .14) 70%);
   border: 1px solid rgba(239, 230, 255, .16);
-  animation: drift 22s ease-in-out infinite alternate;
+  animation: drift 16s ease-in-out infinite alternate;
 }
 .orbs i:nth-child(1) { width: 120vw; height: 120vw; left: 18%; bottom: -78vw; }
 .orbs i:nth-child(2) { width: 70vw; height: 70vw; left: -30%; bottom: -36vw; animation-duration: 28s; animation-delay: -6s; }
 .orbs i:nth-child(3) { width: 44vw; height: 44vw; right: -12%; bottom: 22%; animation-duration: 18s; animation-delay: -3s; opacity: .7; }
 .orbs i:nth-child(4) { width: 16vw; height: 16vw; left: 8%; top: 46%; animation-duration: 15s; opacity: .55; }
 @keyframes drift {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to { transform: translate3d(2.5vw, -2vw, 0) scale(1.04); }
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(5vw, -4vw, 0) scale(1.08); }
+  100% { transform: translate3d(-3vw, 3vw, 0) scale(.96); }
 }
+.orbs i:nth-child(2n) { animation-direction: alternate-reverse; }
 
 .hero-copy {
   position: relative; z-index: 3;
@@ -185,12 +187,34 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
 }
 .kicker { font: 400 .74rem/1.4 var(--display); letter-spacing: .32em; text-transform: uppercase; color: var(--lilac); margin-bottom: 14px; }
 .hero h1 {
-  font: 300 clamp(2.3rem, 10.2vw, 5rem)/1.04 var(--display);
-  letter-spacing: .16em; text-transform: uppercase; margin-right: -.16em;
-  margin-bottom: 18px;
+  font: 400 clamp(2.6rem, 12.4vw, 5.8rem)/1 var(--display);
+  letter-spacing: .1em; text-transform: uppercase; margin-right: -.1em;
+  margin-bottom: 10px;
 }
+/* the logo tagline, set smaller under the name so the business name leads */
+.hero-tagline { margin: 0 0 18px; font: 300 clamp(1rem, 4.4vw, 1.45rem)/1.3 var(--display); letter-spacing: .34em; text-transform: uppercase; color: var(--lavender); }
 .lede { font-size: 1rem; line-height: 1.6; color: rgba(255, 255, 255, .9); max-width: 34ch; margin-bottom: 26px; }
-.hero-actions { display: grid; gap: 12px; max-width: 320px; }
+/* booking card: the main action, right in the hero */
+.booking {
+  max-width: 460px; padding: 18px 18px 16px; border-radius: 8px;
+  background: rgba(239, 230, 255, .1); border: 1px solid rgba(239, 230, 255, .24);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 24px 50px -30px rgba(10, 2, 24, .8);
+}
+.booking-status { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 8px; font: 500 .7rem/1.2 var(--display); letter-spacing: .24em; text-transform: uppercase; color: var(--lilac); }
+/* status green says open for bookings; the ring pulses out from it */
+.booking-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #4ADE80; flex: none; }
+.booking-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #4ADE80; animation: beacon 2.4s var(--ease-out) infinite; }
+@keyframes beacon { from { transform: scale(1); opacity: .7; } to { transform: scale(3.2); opacity: 0; } }
+.booking-number {
+  display: inline-block; margin-bottom: 2px; color: var(--white); text-decoration: none;
+  font: 300 clamp(1.9rem, 8.6vw, 2.7rem)/1.15 var(--display); letter-spacing: .06em; font-variant-numeric: tabular-nums;
+  text-decoration-line: underline; text-decoration-color: transparent; text-underline-offset: 6px; text-decoration-thickness: 1px;
+  transition: text-decoration-color .25s ease;
+}
+.booking-number:hover { text-decoration-color: rgba(239, 230, 255, .7); }
+.booking-note { margin: 0 0 14px; font-size: .92rem; color: rgba(255, 255, 255, .82); }
+.booking-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
 /* ---------- the pack: sticker dogs that rock, each with a swinging name tag ---------- */
 .pack { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; min-height: 320px; margin: 22px var(--pad) 14px; }
@@ -261,22 +285,24 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
 @media (max-width: 899px) {
   .hero { min-height: max(720px, 100svh); }
   .hero .lede { display: none; }
-  .hero-actions { grid-template-columns: 1fr 1fr; max-width: none; gap: 10px; }
-  .hero-actions .btn { padding: 14px 10px; letter-spacing: .2em; font-size: .74rem; }
+  .booking-actions .btn { padding: 14px 10px; letter-spacing: .2em; font-size: .74rem; }
+  .hero h1 { margin-bottom: 8px; }
+  .hero-tagline { margin-bottom: 16px; }
   /* a size container needs a definite height, and a column flex item inside a min-height hero has none */
-  .pack-stage { flex: none; height: max(300px, calc(100svh - 400px)); }
+  .pack-stage { flex: none; height: max(280px, calc(100svh - 520px)); }
 }
-@media (max-width: 374px) { .hero-actions .btn { padding-inline: 8px; letter-spacing: .12em; } }
+@media (max-width: 374px) { .booking-actions .btn { padding-inline: 8px; letter-spacing: .12em; } }
 
 @media (min-width: 900px) {
-  .hero { min-height: max(680px, 100svh); }
   .hero-copy {
     margin-left: auto; margin-right: max(48px, calc((100vw - var(--max)) / 2));
-    padding: 0; padding-top: max(150px, 22vh); width: 44%; max-width: 520px;
+    padding: 0; padding-top: max(124px, 17vh); width: 46%; max-width: 640px;
   }
-  .hero h1 { font-size: clamp(3rem, 5.6vw, 5.2rem); }
-  .lede { font-size: 1.05rem; }
-  .hero-actions { margin-top: 34px; }
+  /* one line on desktop so the booking card clears the bottom bar */
+  .hero h1 { font-size: clamp(3rem, 5vw, 5.2rem); letter-spacing: .08em; margin-right: -.08em; white-space: nowrap; margin-bottom: 10px; }
+  .lede { font-size: 1.05rem; max-width: 42ch; margin-bottom: 20px; }
+  .booking { padding: 22px 24px 20px; }
+  .hero { min-height: max(720px, 100svh); }
   .pack { position: absolute; left: max(32px, 4vw); width: 44vw; top: 118px; bottom: 66px; margin: 0; min-height: 0; }
   .tag { padding: 14px 28px 13px; min-width: 180px; }
   .tag-name { font-size: 1.35rem; }
@@ -302,25 +328,6 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
 }
 @keyframes nudge { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(4px); } }
 
-/* ---------- booking strip under the hero ---------- */
-.panel {
-  position: relative; z-index: 5;
-  margin: 0; padding: 26px var(--pad) 22px;
-  background: var(--lilac); color: var(--plum);
-  border-bottom: 1px solid var(--line);
-}
-.panel p { margin: 0 0 4px; font-size: .98rem; }
-.panel-h { font: 500 .74rem/1.4 var(--display) !important; letter-spacing: .32em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px !important; }
-.panel a { color: var(--violet-deep); font-weight: 600; text-underline-offset: 3px; }
-.panel-note { margin-top: 10px !important; font-weight: 500; }
-@media (max-width: 899px) {
-  .panel { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; }
-  .panel-h, .panel > p:nth-child(2), .panel-note { grid-column: 1 / -1; }
-}
-@media (min-width: 900px) {
-  .panel { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 10px 40px; padding: 22px 48px; }
-  .panel p, .panel-h, .panel-note { margin: 0 !important; }
-}
 main { position: relative; }
 
 /* ---------- sections ---------- */
@@ -337,34 +344,38 @@ main { position: relative; }
 .laurel { display: block; width: 154px; height: 28px; margin: 16px auto 0; color: var(--gold); fill: currentColor; }
 @media (min-width: 900px) { .sec { padding: 120px 48px; } .sec-head { margin-bottom: 72px; } }
 
-/* specialties: cut-out on a lavender disc, alternating sides */
-.specs { display: grid; gap: 64px; max-width: var(--max); margin: 0 auto; }
-.spec { display: grid; gap: 28px; justify-items: center; text-align: center; }
-.spec-disc {
-  position: relative; width: min(78vw, 340px); aspect-ratio: 1; border-radius: 50%;
-  background: radial-gradient(circle at 34% 28%, #DCC7FF, var(--lavender) 58%, #A47BEE);
-  box-shadow: inset 0 -18px 40px rgba(90, 12, 147, .18);
+/* services: compact cards on a grid that wraps, so more services drop straight in */
+.services { position: relative; z-index: 2; list-style: none; margin: 0 auto; padding: 0; max-width: 1180px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.svc {
+  flex: 0 1 calc(50% - 7px); position: relative; text-align: center;
+  background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 22px 12px 18px;
+  box-shadow: 0 18px 36px -30px rgba(34, 16, 58, .5);
+  transition: translate .45s var(--ease-out), box-shadow .45s var(--ease-out);
 }
-.spec-disc::after { content: ""; position: absolute; left: 18%; right: 18%; bottom: 6%; height: 7%; border-radius: 50%; background: rgba(34, 16, 58, .28); filter: blur(8px); }
-.spec-disc img { position: absolute; z-index: 1; left: 50%; bottom: 7%; width: auto; height: 92%; max-width: 112%; object-fit: contain; object-position: 50% 100%; transform: translateX(-50%); transition: translate .45s var(--ease-out); }
-/* hover uses the separate translate property so it never waits on the entrance delay */
-@media (hover: hover) and (pointer: fine) { .spec:hover .spec-disc img { translate: 0 -8px; } }
-.spec-disc--empty { display: grid; place-items: center; background: var(--lilac); border: 1.5px dashed rgba(126, 18, 200, .35); box-shadow: none; }
-.spec-disc--empty::after { display: none; }
-.spec-text { max-width: 34ch; }
-.spec h3 { font: 400 1.3rem/1.3 var(--display); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 12px; color: var(--plum); }
-.spec p { color: var(--ink-soft); }
-@media (min-width: 900px) {
-  .specs { gap: 96px; }
-  .spec { grid-template-columns: 1fr 1fr; align-items: center; gap: 72px; text-align: left; justify-items: start; }
-  .spec-disc { width: min(100%, 400px); justify-self: end; }
-  .spec--flip .spec-disc { order: 2; justify-self: start; }
-  .spec--flip .spec-text { justify-self: end; }
-  .spec h3 { font-size: 1.5rem; }
+.svc-disc {
+  position: relative; width: min(100%, 124px); aspect-ratio: 1; margin: 0 auto 14px; border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #DCC7FF, var(--lavender) 58%, #A47BEE);
+  box-shadow: inset 0 -12px 26px rgba(90, 12, 147, .18);
+}
+.svc-disc img { position: absolute; left: 50%; bottom: 6%; width: auto; height: 104%; max-width: 128%; object-fit: contain; object-position: 50% 100%; transform: translateX(-50%); transition: translate .45s var(--ease-out); }
+.svc-disc--empty { display: grid; place-items: center; padding: 10px; background: var(--lilac); border: 1.5px dashed rgba(126, 18, 200, .35); box-shadow: none; }
+.svc-disc--empty .gap { font-size: .74rem; line-height: 1.3; }
+.svc h3 { font: 400 .86rem/1.3 var(--display); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 6px; color: var(--plum); }
+.svc p { margin: 0; font-size: .86rem; line-height: 1.45; color: var(--ink-soft); }
+@media (hover: hover) and (pointer: fine) {
+  .svc:hover { translate: 0 -6px; box-shadow: 0 26px 44px -28px rgba(34, 16, 58, .55); }
+  .svc:hover .svc-disc img { translate: 0 -8px; }
+}
+@media (min-width: 640px) { .svc { flex-basis: calc(33.333% - 10px); } }
+@media (min-width: 1000px) {
+  .services { gap: 18px; }
+  .svc { flex-basis: calc(20% - 15px); padding: 26px 16px 22px; }
+  .svc-disc { width: min(100%, 150px); }
+  .svc h3 { font-size: .9rem; }
 }
 
 /* ---------- work gallery ---------- */
-.gallery { display: grid; gap: 28px; max-width: 1360px; margin: 0 auto; }
+.gallery { position: relative; z-index: 2; display: grid; gap: 28px; max-width: 1360px; margin: 0 auto; }
 .g-row { position: relative; }
 .g-bar { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 14px; }
 .g-btn {
@@ -422,6 +433,8 @@ main { position: relative; }
 .lb-next { right: 14px; top: 50%; translate: 0 -50%; }
 
 /* ---------- review ---------- */
+.orbs--flip { scale: -1 1; }
+.orbs--lilac i { background: radial-gradient(circle at 35% 30%, rgba(239, 230, 255, .95), rgba(192, 154, 255, .26) 70%) !important; border-color: rgba(126, 18, 200, .1) !important; }
 .orbs--soft i { background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .7), rgba(192, 154, 255, .22) 70%); border-color: rgba(126, 18, 200, .08); }
 .orbs--soft i:nth-child(1) { width: 90vw; height: 90vw; left: -40vw; bottom: -50vw; }
 .orbs--soft i:nth-child(2) { width: 50vw; height: 50vw; right: -20vw; top: -16vw; }
@@ -463,7 +476,7 @@ main { position: relative; }
 }
 
 /* ---------- contact us: home-based, so phone, email, hours and area only, no map or address ---------- */
-.contact { position: relative; max-width: 620px; margin: 0 auto; }
+.contact { position: relative; z-index: 2; max-width: 620px; margin: 0 auto; }
 .contact-card { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 30px 24px 26px; box-shadow: 0 30px 60px -40px rgba(34, 16, 58, .45); }
 /* Biscuit peeks over the card's corner and rocks like the hero stickers */
 .contact-pup {
@@ -541,10 +554,86 @@ main { position: relative; }
 .book-bar.is-on { transform: none; }
 @media (min-width: 900px) { .book-bar { display: none; } }
 
+/* ---------- the bubble world: one environment behind the whole page ----------
+   Big soap bubbles drift along the edges, small ones rise, grooming tools float.
+   main.js places them and moves them with scroll speed and the mouse. */
+.env { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.env-item { position: absolute; left: 0; top: 0; will-change: transform; }
+.soap { position: relative; width: var(--s); height: var(--s); border-radius: 50%; animation: wobble var(--w, 9s) ease-in-out infinite alternate; }
+/* thin film: a soft clear body, a bright rim, a slowly turning rainbow edge and two glints */
+.soap::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 58%, rgba(255, 255, 255, .18) 68%, rgba(255, 255, 255, .55) 71%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(circle at 50% 55%, rgba(255, 255, 255, .1), rgba(200, 170, 255, .24) 70%, rgba(255, 255, 255, 0) 71%);
+}
+.soap > i {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, #FFC8F2, #C6B4FF, #9FE6FF, #C8FFD8, #FFF0AE, #FFC8F2);
+  -webkit-mask: radial-gradient(circle, transparent 64.5%, #000 68%, #000 70.6%, transparent 71.2%);
+  mask: radial-gradient(circle, transparent 64.5%, #000 68%, #000 70.6%, transparent 71.2%);
+  opacity: .95; animation: film 18s linear infinite;
+}
+.soap::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background:
+    radial-gradient(ellipse 15% 9% at 30% 24%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 100%),
+    radial-gradient(ellipse 6% 4% at 40% 17%, rgba(255, 255, 255, .8), rgba(255, 255, 255, 0) 100%),
+    radial-gradient(ellipse 18% 6% at 66% 82%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 100%);
+  transform: rotate(-12deg);
+}
+@keyframes film { to { transform: rotate(360deg); } }
+@keyframes wobble { 0% { transform: scale(1, 1); } 50% { transform: scale(1.03, .97); } 100% { transform: scale(.98, 1.02); } }
+.tool { width: var(--s); height: var(--s); color: var(--violet); opacity: .26; animation: bob var(--w, 7s) ease-in-out infinite alternate; }
+.tool svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes bob { from { transform: translateY(-10px) rotate(-8deg); } to { transform: translateY(10px) rotate(8deg); } }
+.env-rise { position: absolute; inset: 0; will-change: transform; }
+.env-rise .bub { bottom: -70px; }
+.env-rise .bub > i { animation: sway var(--sw) ease-in-out infinite alternate; }
+
+/* platforms float over the bubble world, so the bubbles show at their edges */
+.sec--platform {
+  margin-inline: clamp(10px, 3.2vw, 44px); border-radius: clamp(22px, 3vw, 40px);
+  background: var(--white); box-shadow: 0 40px 80px -50px rgba(34, 16, 58, .45), 0 2px 0 rgba(255, 255, 255, .6) inset;
+}
+.sec--platform.sec--plum { background: var(--plum); }
+.sec--platform + .sec--platform { margin-top: 18px; }
+#book { margin-bottom: clamp(10px, 3.2vw, 44px); }
+
+/* ---------- soap bubbles: rise through every section; scrolling pushes them, then they settle ---------- */
+.bubbles { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.bub {
+  position: absolute; bottom: -90px; left: var(--x); width: var(--s); height: var(--s); opacity: 0;
+  animation: rise var(--d) linear var(--delay) infinite;
+}
+.bub > i {
+  display: block; width: 100%; height: 100%; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .5);
+  background:
+    radial-gradient(ellipse 22% 14% at 32% 26%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 100%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 55%, rgba(198, 180, 255, .35) 80%, rgba(159, 230, 255, .4) 92%, rgba(255, 200, 242, .45) 100%);
+  animation: sway var(--sw) ease-in-out infinite alternate;
+}
+.bubbles--light .bub > i {
+  border-color: rgba(126, 18, 200, .22);
+  background:
+    radial-gradient(ellipse 22% 14% at 32% 26%, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 100%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, .1) 55%, rgba(176, 140, 255, .3) 80%, rgba(120, 200, 255, .3) 92%, rgba(255, 170, 230, .4) 100%);
+}
+@keyframes rise {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: 1; }
+  86% { opacity: 1; }
+  100% { transform: translate3d(0, var(--travel, -900px), 0); opacity: 0; }
+}
+@keyframes sway { from { transform: translateX(calc(var(--amp) * -1)); } to { transform: translateX(var(--amp)); } }
+.bubbles.is-off .bub, .bubbles.is-off .bub > i { animation-play-state: paused; }
+
 /* ---------- motion: entrances and reveals (JS adds the classes) ---------- */
 .js [data-enter] { opacity: 0; transform: translateY(18px); }
 .js .is-ready [data-enter], .js.is-ready [data-enter] { opacity: 1; transform: none; transition: opacity .8s ease, transform .9s var(--ease-out); }
 .js.is-ready [data-enter="1"] { transition-delay: .15s; }
+.js.is-ready [data-enter="2"] { transition-delay: .45s; }
 .js.is-ready [data-enter="3"] { transition-delay: .55s; }
 .js.is-ready [data-enter="4"] { transition-delay: .7s; }
 
@@ -569,14 +658,12 @@ main { position: relative; }
 .js .sec-head .laurel { clip-path: inset(0 50% 0 50%); opacity: 0; }
 .js .sec-head.is-in .laurel { clip-path: inset(0 0 0 0); opacity: 1; transition: clip-path 1s var(--ease-out) .35s, opacity .4s ease .35s; }
 
-/* specialties: the disc grows, then the dog rises out of it, then the words */
-.js [data-reveal="spec"] { opacity: 1; }
-.js .spec .spec-disc { transform: scale(.86); opacity: 0; }
-.js .spec .spec-disc img { transform: translateX(-50%) translateY(14%); opacity: 0; }
-.js .spec .spec-text { transform: translateY(22px); opacity: 0; }
-.js .spec.is-in .spec-disc { transform: none; opacity: 1; transition: transform .9s var(--ease-out), opacity .6s ease; }
-.js .spec.is-in .spec-disc img { transform: translateX(-50%); opacity: 1; transition: transform 1s var(--ease-out) .18s, opacity .5s ease .18s, translate .45s var(--ease-out); }
-.js .spec.is-in .spec-text { transform: none; opacity: 1; transition: transform .9s var(--ease-out) .3s, opacity .6s ease .3s; }
+/* services: cards pop in one after another, then each dog rises out of its disc */
+.js [data-reveal="cards"] { opacity: 1; }
+.js [data-reveal="cards"] .svc { opacity: 0; transform: translateY(26px) scale(.94); }
+.js [data-reveal="cards"] .svc-disc img { opacity: 0; transform: translateX(-50%) translateY(18%); }
+.js [data-reveal="cards"].is-in .svc { opacity: 1; transform: none; transition: opacity .5s ease calc(var(--i) * 90ms), transform .8s var(--ease-back) calc(var(--i) * 90ms), translate .45s var(--ease-out), box-shadow .45s var(--ease-out); }
+.js [data-reveal="cards"].is-in .svc-disc img { opacity: 1; transform: translateX(-50%); transition: opacity .4s ease calc(var(--i) * 90ms + 250ms), transform .8s var(--ease-out) calc(var(--i) * 90ms + 250ms), translate .45s var(--ease-out); }
 
 /* the booking dog peeks up once the section lands */
 .js .book-dog { transform: translateY(40%); opacity: 0; }
@@ -602,20 +689,21 @@ main { position: relative; }
 
 /* capture mode and reduced motion: everything landed, nothing loops, the slider holds still */
 .still [data-enter], .still [data-reveal], .still .g-track li, .still [data-words] .w > span,
-.still .sec-head .laurel, .still .spec .spec-disc, .still .spec .spec-text, .still .book-dog, .still .nav li { opacity: 1 !important; transform: none !important; translate: none !important; clip-path: none !important; transition: none !important; }
-.still .spec .spec-disc img { opacity: 1 !important; transform: translateX(-50%) !important; transition: none !important; }
-.still .orbs i, .still .scroll-cue svg, .still .review, .still .pup-rock, .still .tag, .still .pause-ring, .still .contact-pup { animation: none !important; }
+.still .sec-head .laurel, .still .svc, .still .book-dog, .still .nav li { opacity: 1 !important; transform: none !important; translate: none !important; clip-path: none !important; transition: none !important; }
+.still .svc-disc img { opacity: 1 !important; transform: translateX(-50%) !important; transition: none !important; }
+.still .env *, .still .bubbles, .still .orbs i, .still .scroll-cue svg, .still .review, .still .pup-rock, .still .tag, .still .pause-ring, .still .contact-pup, .still .booking-dot::after { animation: none !important; }
 .still .pack-stage { opacity: 1 !important; translate: none !important; transition: none !important; }
 .still .pup, .still .slide-bg, .still .tag { transition: none !important; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js [data-enter], .js [data-reveal], .js .g-track li, .js [data-words] .w > span,
-  .js .sec-head .laurel, .js .spec .spec-disc, .js .spec .spec-text, .js .book-dog, .js .pack-stage, .nav li { opacity: 1 !important; transform: none !important; translate: none !important; clip-path: none !important; transition: none !important; }
-  .js .spec .spec-disc img { opacity: 1 !important; transform: translateX(-50%) !important; transition: none !important; }
-  .orbs i, .scroll-cue svg, .review-wrap.is-in .review, .pup-rock, .tag, .pause-ring, .contact-pup { animation: none !important; }
+  .js .sec-head .laurel, .js .svc, .js .book-dog, .js .pack-stage, .nav li { opacity: 1 !important; transform: none !important; translate: none !important; clip-path: none !important; transition: none !important; }
+  .js .svc-disc img { opacity: 1 !important; transform: translateX(-50%) !important; transition: none !important; }
+  .orbs i, .scroll-cue svg, .review-wrap.is-in .review, .pup-rock, .tag, .pause-ring, .contact-pup, .booking-dot::after { animation: none !important; }
   .pup { transform: none !important; transition: opacity .3s ease !important; }
   .tag { scale: 1 !important; transition: opacity .3s ease !important; }
   .slide-bg { transform: none !important; transition: opacity .3s ease !important; }
-  .photo, .review, .spec-disc img { transition: none !important; }
-  .btn::after, .pause { display: none; }
+  .photo, .review, .svc-disc img { transition: none !important; }
+  .btn::after, .pause, .bubbles, .env-rise { display: none; }
+  .soap, .soap > i, .tool { animation: none !important; }
 }

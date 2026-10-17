@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/stick/golden-retriever-bandana.webp" fetchpriority="high">
-<link rel="stylesheet" href="styles.css?v=15">
+<link rel="stylesheet" href="styles.css?v=18">
 <script>document.documentElement.classList.add('js');if(/[?&]still=1/.test(location.search))document.documentElement.classList.add('still');</script>
 </head>
 <body>
@@ -38,6 +38,12 @@
       <use href="#branch" transform="translate(62 0) scale(-1 1)"/>
       <circle cx="66" cy="10" r="2.4"/>
     </symbol>
+    <symbol id="ic-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></symbol>
+    <symbol id="ic-comb" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="4" rx="1.2"/><path d="M5 11v6M8 11v7M11 11v6M14 11v7M17 11v6M20 11v4"/></symbol>
+    <symbol id="ic-brush" viewBox="0 0 24 24"><rect x="4" y="2.5" width="16" height="9" rx="3"/><path d="M8 6v2M12 6v2M16 6v2M12 11.5V21.5"/></symbol>
+    <symbol id="ic-clippers" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="15" rx="4"/><path d="M7.5 7V4.5h9V7M9.5 4.5V2M12 4.5V2M14.5 4.5V2M10 13h4"/></symbol>
+    <symbol id="ic-bone" viewBox="0 0 24 24"><path d="M7.5 7.5 16.5 16.5"/><circle cx="5.2" cy="8.2" r="2.2"/><circle cx="8.2" cy="5.2" r="2.2"/><circle cx="15.8" cy="18.8" r="2.2"/><circle cx="18.8" cy="15.8" r="2.2"/></symbol>
+    <symbol id="ic-paw" viewBox="0 0 24 24"><circle cx="6.5" cy="10" r="1.9"/><circle cx="10" cy="6" r="1.9"/><circle cx="14.5" cy="6" r="1.9"/><circle cx="18" cy="10" r="1.9"/><path d="M8 17.2c0-3 2-5.2 4.3-5.2s4.3 2.2 4.3 5.2c0 2.2-2 3-4.3 2.4-2.3.6-4.3-.2-4.3-2.4z"/></symbol>
     <symbol id="chev-l" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="chev-r" viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="chev-d" viewBox="0 0 24 24"><path d="M5.5 9.5 12 16l6.5-6.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -45,6 +51,7 @@
 </svg>
 
 <a class="skip" href="#main">Skip to the content</a>
+<div class="env" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
 <header class="top" id="top-bar">
@@ -53,7 +60,7 @@
   </a>
   <nav class="nav" id="nav" aria-label="Main">
     <ul>
-      <li><a href="#specialties">Specialties</a></li>
+      <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -68,7 +75,7 @@
 
 <main id="main">
 
-  <section class="hero" id="hero" aria-label="BFF Groomer">
+  <section class="hero" id="hero" aria-label="BFF Groomer" data-bubbles="dark">
     <div class="hero-slides" aria-hidden="true">
       <img class="slide-bg is-active" src="assets/blur/golden-retriever-bandana.webp" alt="" data-bg>
       <img class="slide-bg" src="assets/blur/shih-tzu-bandana.webp" alt="" data-bg>
@@ -84,12 +91,18 @@
     <div class="orbs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
     <div class="hero-copy">
-      <p class="kicker" data-enter="1">BFF Groomer, downtown St. Catharines</p>
-      <h1 data-words>All species pets</h1>
+      <p class="kicker" data-enter="1">Downtown St. Catharines</p>
+      <h1 data-words>BFF Groomer</h1>
+      <p class="hero-tagline" data-enter="2">All species pets</p>
       <p class="lede" data-enter="3">Home-based grooming salon for dogs, cats, rabbits and birds. Hand-stripping terrier specialist and low stress cat grooming.</p>
-      <div class="hero-actions" data-enter="4">
-        <a class="btn btn-pale" href="sms:+12899909308">Text to book</a>
-        <a class="btn btn-line" href="#work">See the work</a>
+      <div class="booking" data-enter="4">
+        <p class="booking-status"><span class="booking-dot" aria-hidden="true"></span>Accepting new clients</p>
+        <a class="booking-number" href="sms:+12899909308" aria-label="Text 289-990-9308 to book">289-990-9308</a>
+        <p class="booking-note">Booking by text or email only.</p>
+        <div class="booking-actions">
+          <a class="btn btn-pale" href="sms:+12899909308">Text to book</a>
+          <a class="btn btn-line" data-mail href="#contact">Email</a>
+        </div>
       </div>
     </div>
 
@@ -160,7 +173,7 @@
     </div>
 
     <div class="hero-foot">
-      <a class="scroll-cue" href="#specialties" aria-label="Scroll to specialties"><svg aria-hidden="true"><use href="#chev-d"/></svg></a>
+      <a class="scroll-cue" href="#services" aria-label="Scroll to services"><svg aria-hidden="true"><use href="#chev-d"/></svg></a>
       <span class="hero-foot-links">
         <a href="https://www.instagram.com/bffgroomer/" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/bffgroomer/" rel="noopener">Facebook</a>
@@ -168,54 +181,42 @@
     </div>
   </section>
 
-  <aside class="panel" aria-label="Booking">
-    <p class="panel-h">Booking</p>
-    <p>By text or email only.</p>
-    <p><a href="sms:+12899909308">Text 289-990-9308</a></p>
-    <p><a data-mail href="#book">Email BFF Groomer</a></p>
-    <p class="panel-note">Accepting new clients.</p>
-  </aside>
 
-  <section class="sec sec--mist" id="specialties" aria-labelledby="spec-h">
+  <section class="sec" id="services" aria-labelledby="svc-h">
     <header class="sec-head" data-reveal="fade">
-      <h2 id="spec-h" data-words>Specialties</h2>
+      <h2 id="svc-h" data-words>Services</h2>
       <svg class="laurel" aria-hidden="true"><use href="#laurel"/></svg>
     </header>
-
-    <div class="specs">
-      <article class="spec" data-reveal="spec">
-        <div class="spec-disc" data-depth="0.06">
-          <img src="assets/cut/airedale.webp" width="1131" height="1076" loading="lazy" alt="A groomed Airedale terrier, side view">
-        </div>
-        <div class="spec-text">
+    <ul class="services" data-reveal="cards">
+        <li class="svc" style="--i:0">
+          <div class="svc-disc"><img src="assets/cut/airedale.webp" width="1131" height="1076" loading="lazy" alt="A groomed Airedale terrier, side view"></div>
           <h3>Hand-stripping</h3>
-          <p>Hand-stripping terrier specialist. Airedales, schnauzers, Dandie Dinmonts and other wiry coats.</p>
-        </div>
-      </article>
-
-      <article class="spec spec--flip" data-reveal="spec">
-        <div class="spec-disc spec-disc--empty" data-depth="0.06">
-          <span class="gap">[Cat photo needed]</span>
-        </div>
-        <div class="spec-text">
+          <p>Terrier specialist. Airedales, schnauzers, Dandie Dinmonts and other wiry coats.</p>
+        </li>
+        <li class="svc" style="--i:1">
+          <div class="svc-disc svc-disc--empty"><span class="gap">[Cat photo needed]</span></div>
           <h3>Low stress cat grooming</h3>
           <p>Text to ask about grooming your cat.</p>
-        </div>
-      </article>
-
-      <article class="spec" data-reveal="spec">
-        <div class="spec-disc" data-depth="0.06">
-          <img src="assets/cut/cocker-pair.webp" width="1295" height="989" loading="lazy" alt="Two black cocker spaniels in lemon print bandanas">
-        </div>
-        <div class="spec-text">
-          <h3>All sizes, all species</h3>
-          <p>Professional groomer for all sizes and species: dogs, cats, rabbits and birds.</p>
-        </div>
-      </article>
-    </div>
+        </li>
+        <li class="svc" style="--i:2">
+          <div class="svc-disc"><img src="assets/cut/cocker-pair.webp" width="1295" height="989" loading="lazy" alt="Two black cocker spaniels in lemon print bandanas"></div>
+          <h3>Dogs of all sizes</h3>
+          <p>Professional grooming for dogs of every size.</p>
+        </li>
+        <li class="svc" style="--i:3">
+          <div class="svc-disc"><img src="assets/cut/apricot-doodle.webp" width="680" height="1200" loading="lazy" alt="A groomed apricot doodle sitting"></div>
+          <h3>Doodles</h3>
+          <p>Doodle grooms. Text to book yours.</p>
+        </li>
+        <li class="svc" style="--i:4">
+          <div class="svc-disc svc-disc--empty"><span class="gap">[Rabbit or bird photo needed]</span></div>
+          <h3>Rabbits and birds</h3>
+          <p>Rabbits and birds are groomed here too.</p>
+        </li>
+    </ul>
   </section>
 
-  <section class="sec sec--white" id="work" aria-labelledby="work-h">
+  <section class="sec sec--platform" id="work" aria-labelledby="work-h">
     <header class="sec-head" data-reveal="fade">
       <h2 id="work-h" data-words>Fresh off the table</h2>
       <svg class="laurel" aria-hidden="true"><use href="#laurel"/></svg>
@@ -271,8 +272,7 @@
     <figure><img src="" alt=""><figcaption></figcaption></figure>
   </dialog>
 
-  <section class="sec sec--lilac" id="reviews" aria-labelledby="rev-h">
-    <div class="orbs orbs--soft" aria-hidden="true" data-depth="0.12"><i></i><i></i><i></i></div>
+  <section class="sec" id="reviews" aria-labelledby="rev-h">
     <header class="sec-head" data-reveal="fade">
       <h2 id="rev-h" data-words>Kind words</h2>
       <svg class="laurel" aria-hidden="true"><use href="#laurel"/></svg>
@@ -289,7 +289,7 @@
     </div>
   </section>
 
-  <section class="sec sec--mist" id="contact" aria-labelledby="contact-h">
+  <section class="sec" id="contact" aria-labelledby="contact-h">
     <header class="sec-head" data-reveal="fade">
       <h2 id="contact-h" data-words>Contact us</h2>
       <svg class="laurel" aria-hidden="true"><use href="#laurel"/></svg>
@@ -308,7 +308,7 @@
     </div>
   </section>
 
-  <section class="sec sec--plum" id="book" aria-labelledby="book-h">
+  <section class="sec sec--plum sec--platform" id="book" aria-labelledby="book-h" data-bubbles="dark">
     <div class="orbs orbs--dark" aria-hidden="true" data-depth="0.12"><i></i><i></i><i></i></div>
     <header class="sec-head sec-head--light" data-reveal="fade">
       <h2 id="book-h" data-words>Book a groom</h2>
@@ -348,7 +348,7 @@
 <footer class="foot">
   <img class="foot-logo" src="assets/brand/logo-256.webp" width="256" height="256" loading="lazy" alt="BFF Groomer, All Species Pets">
   <nav class="foot-links" aria-label="Footer">
-    <a href="#specialties">Specialties</a>
+    <a href="#services">Services</a>
     <a href="#work">Work</a>
     <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
@@ -356,11 +356,11 @@
     <a href="https://www.instagram.com/bffgroomer/" rel="noopener">Instagram</a>
     <a href="https://www.facebook.com/bffgroomer/" rel="noopener">Facebook</a>
   </nav>
-  <p class="fine">BFF Groomer, downtown St. Catharines. Site by Haydn McIntyre.</p>
+  <p class="fine">BFF Groomer, downtown St. Catharines.</p>
 </footer>
 
 <a class="book-bar" href="sms:+12899909308" inert>Text to book <span>289-990-9308</span></a>
 
-<script src="main.js?v=15" defer></script>
+<script src="main.js?v=18" defer></script>
 </body>
 </html>
