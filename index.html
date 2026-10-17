@@ -1,359 +1,266 @@
 <!doctype html>
-<html lang="en-CA" data-theme="light">
+<html lang="en-CA">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>BFF Groomer | Pet grooming in St. Catharines</title>
-<meta name="description" content="Home-based groomer in downtown St. Catharines for dogs, cats, rabbits and birds. Hand-stripping for terriers and low stress cat grooming. Text to book.">
+<title>BFF Groomer | All species pet grooming in St. Catharines</title>
+<meta name="description" content="Home-based grooming salon in downtown St. Catharines for dogs, cats, rabbits and birds. Hand-stripping terrier specialist and low stress cat grooming. Text to book.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#FBF7EE">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232348A8' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M7.5 10.5A5 5 0 0 1 10.5 7.5'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#22103A">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/brand/logo-64.png">
+<link rel="apple-touch-icon" href="assets/brand/logo-128.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=3">
-<script>document.documentElement.classList.add('js');</script>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/cut/golden-retriever-bandana.webp" fetchpriority="high">
+<link rel="stylesheet" href="styles.css?v=7">
+<script>document.documentElement.classList.add('js');if(/[?&]still=1/.test(location.search))document.documentElement.classList.add('still');</script>
 </head>
-<body data-grammar="bands">
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="leaf" d="M0 0C3-3.4 8.5-3.6 13 0C8.5 2.6 3 2.4 0 0z"/>
+    <g id="branch">
+      <path d="M0 10C16 10 36 8.4 60 2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+      <use href="#leaf" transform="translate(6 9.9) rotate(-50)"/>
+      <use href="#leaf" transform="translate(12 9.8) rotate(22) scale(.95)"/>
+      <use href="#leaf" transform="translate(18 9.4) rotate(-46) scale(.95)"/>
+      <use href="#leaf" transform="translate(24 8.9) rotate(18) scale(.9)"/>
+      <use href="#leaf" transform="translate(30 8.3) rotate(-42) scale(.9)"/>
+      <use href="#leaf" transform="translate(36 7.5) rotate(14) scale(.84)"/>
+      <use href="#leaf" transform="translate(42 6.7) rotate(-38) scale(.82)"/>
+      <use href="#leaf" transform="translate(48 5.6) rotate(8) scale(.74)"/>
+      <use href="#leaf" transform="translate(54 4.2) rotate(-18) scale(.72)"/>
+    </g>
+    <symbol id="laurel" viewBox="0 -2 132 24">
+      <use href="#branch" transform="translate(70 0)"/>
+      <use href="#branch" transform="translate(62 0) scale(-1 1)"/>
+      <circle cx="66" cy="10" r="2.4"/>
+    </symbol>
+    <symbol id="chev-l" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="chev-r" viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="chev-d" viewBox="0 0 24 24"><path d="M5.5 9.5 12 16l6.5-6.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
 
 <a class="skip" href="#main">Skip to the content</a>
-
-<div class="env" aria-hidden="true">
-  <div class="env-poster" data-parallax-hero></div>
-  <div class="env-anim"><i></i><i></i></div>
-  <video class="env-video" data-video-slot muted loop playsinline preload="none" tabindex="-1"></video>
-  <div class="env-scrim"></div>
-  <div class="env-veil"></div>
-</div>
 <div class="grain" aria-hidden="true"></div>
 
-<header class="site-header" id="header">
-  <div class="wrap header-inner">
-    <a class="brand" href="#top" aria-label="BFF Groomer, back to the top">
-      <span class="motif" aria-hidden="true"></span>
-      <span>BFF Groomer</span>
-    </a>
-    <nav class="nav" id="menu" aria-label="Main" data-open="false">
-      <ul>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#work">Photos</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#visit">Book</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <a class="btn btn-primary btn-call" href="sms:+12899909308" aria-label="Text 289-990-9308 to book">Text to book</a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
-      <span class="sr">Menu</span>
-      <span class="bars" aria-hidden="true"></span>
-    </button>
-  </div>
-  <div class="progress" aria-hidden="true"></div>
+<header class="top" id="top-bar">
+  <a class="brand" href="#hero" aria-label="BFF Groomer, back to the top">
+    <img src="assets/brand/logo-256.webp" width="256" height="256" alt="BFF Groomer, All Species Pets">
+  </a>
+  <nav class="nav" id="nav" aria-label="Main">
+    <ul>
+      <li><a href="#specialties">Specialties</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#find">Find us</a></li>
+      <li><a href="#book">Book</a></li>
+    </ul>
+  </nav>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">
+    <span class="sr">Menu</span><span class="menu-bars" aria-hidden="true"></span>
+  </button>
+  <span class="progress" aria-hidden="true"></span>
 </header>
 
 <main id="main">
 
-  <section class="hero" id="top" data-hero="stack">
-    <div class="drops drops--hero" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-    <div class="wrap hero-inner">
-      <div class="hero-logo" data-enter style="--e:0">
-        <span class="wordmark">BFF Groomer</span>
+  <section class="hero" id="hero" aria-roledescription="carousel" aria-label="Recent grooms">
+    <div class="hero-slides">
+      <figure class="slide is-active" data-slide aria-roledescription="slide" aria-label="1 of 3">
+        <img class="slide-bg" src="assets/blur/golden-retriever-bandana.webp" alt="" aria-hidden="true">
+        <img class="slide-dog" src="assets/cut/golden-retriever-bandana.webp" width="786" height="1200" fetchpriority="high" alt="A freshly groomed golden retriever in a tropical bandana, smiling">
+      </figure>
+      <figure class="slide" data-slide aria-roledescription="slide" aria-label="2 of 3">
+        <img class="slide-bg" src="assets/blur/shih-tzu-bandana.webp" alt="" aria-hidden="true" loading="lazy">
+        <img class="slide-dog" src="assets/cut/shih-tzu-bandana.webp" width="896" height="1200" loading="lazy" alt="A freshly groomed shih tzu in a green polka dot bandana">
+      </figure>
+      <figure class="slide slide--wide" data-slide aria-roledescription="slide" aria-label="3 of 3">
+        <img class="slide-bg" src="assets/blur/airedale.webp" alt="" aria-hidden="true" loading="lazy">
+        <img class="slide-dog" src="assets/cut/airedale.webp" width="1131" height="1076" loading="lazy" alt="A hand-stripped Airedale terrier standing square, side view">
+      </figure>
+    </div>
+    <div class="hero-wash" aria-hidden="true"></div>
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+    <div class="hero-copy">
+      <div class="dots" role="group" aria-label="Choose a photo">
+        <button type="button" data-dot="0" aria-label="Photo 1" aria-current="true"></button>
+        <button type="button" data-dot="1" aria-label="Photo 2"></button>
+        <button type="button" data-dot="2" aria-label="Photo 3"></button>
       </div>
-      <p class="kicker" data-enter style="--e:1"><span class="motif" aria-hidden="true"></span>Home-based salon, downtown St. Catharines</p>
-      <h1 data-words>Groomer for dogs, cats, rabbits &amp; birds</h1>
-      <p class="lede" data-enter style="--e:3">Hand-stripping for terriers and low stress cat grooming. Book by text or email.</p>
-      <div class="actions" data-enter style="--e:4">
-        <a class="btn btn-primary" href="sms:+12899909308">Text 289-990-9308</a>
-        <a class="btn btn-ghost" href="#work">See the photos</a>
+      <p class="kicker" data-enter="1">BFF Groomer, downtown St. Catharines</p>
+      <h1 data-words>All species pets</h1>
+      <p class="lede" data-enter="3">Home-based grooming salon for dogs, cats, rabbits and birds. Hand-stripping terrier specialist and low stress cat grooming.</p>
+      <div class="hero-actions" data-enter="4">
+        <a class="btn btn-pale" href="sms:+12899909308">Text to book</a>
+        <a class="btn btn-line" href="#work">See the work</a>
       </div>
-      <div class="hero-media">
-        <figure class="hm" data-parallax><img src="assets/fb-1091987896695205.jpg" width="1440" height="1838" loading="eager" fetchpriority="high" alt="A blenheim cavalier with long brushed ears standing on a grooming table"></figure>
-        <figure class="hm"><img src="assets/fb-1046168561277139.jpg" width="1283" height="1440" loading="eager" fetchpriority="high" alt="A black terrier with its tongue out, sitting on a grooming table"></figure>
-        <figure class="hm"><img src="assets/fb-1153534513873876.jpg" width="1440" height="1621" loading="eager" fetchpriority="high" alt="An apricot poodle with a round fluffy face looking up"></figure>
-        <figure class="hm"><img src="assets/fb-1164155379478456.jpg" width="1440" height="1440" loading="eager" fetchpriority="high" alt="Close up of a Dandie Dinmont terrier with a white topknot"></figure>
-        <span class="hm-badge" aria-hidden="true"><span class="motif"></span></span>
-      </div>
+    </div>
+
+    <div class="hero-foot" aria-hidden="false">
+      <a class="scroll-cue" href="#specialties" aria-label="Scroll to specialties"><svg aria-hidden="true"><use href="#chev-d"/></svg></a>
+      <span class="hero-foot-links">
+        <a href="https://www.instagram.com/bffgroomer/" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/bffgroomer/" rel="noopener">Facebook</a>
+      </span>
     </div>
   </section>
 
-  <section class="section section--alt" id="services" aria-labelledby="services-h">
-    <div class="wrap">
-      <div class="section-head" data-reveal="fade">
-        <h2 id="services-h" data-words>Services</h2>
-      </div>
-      <ul class="services" data-services="rows" data-reveal-group>
-        <li class="service" data-reveal="left">
-          <h3><span class="motif sv-dot" aria-hidden="true"></span>Hand-stripping</h3>
-          <p>Hand-stripping terrier specialist.</p>
-        </li>
-        <li class="service" data-reveal="right">
-          <h3><span class="motif sv-dot" aria-hidden="true"></span>Low stress cat grooming</h3>
-          <p>Grooming for cats, kept low stress.</p>
-        </li>
-        <li class="service" data-reveal="left">
-          <h3><span class="motif sv-dot" aria-hidden="true"></span>Dogs of all sizes</h3>
-          <p>From doodles to terriers.</p>
-        </li>
-        <li class="service" data-reveal="right">
-          <h3><span class="motif sv-dot" aria-hidden="true"></span>Rabbits and birds</h3>
-          <p>Groomed here too. Text to book.</p>
-        </li>
-      </ul>
+  <aside class="panel" aria-label="Booking">
+    <p class="panel-h">Booking</p>
+    <p>By text or email only.</p>
+    <p><a href="sms:+12899909308">Text 289-990-9308</a></p>
+    <p><a data-mail href="#book">Email BFF Groomer</a></p>
+    <p class="panel-note">Accepting new clients.</p>
+  </aside>
+
+  <section class="sec sec--mist" id="specialties" aria-labelledby="spec-h">
+    <header class="sec-head" data-reveal="fade">
+      <h2 id="spec-h" data-words>Specialties</h2>
+      <svg class="laurel" aria-hidden="true"><use href="#laurel"/></svg>
+    </header>
+
+    <div class="specs">
+      <article class="spec" data-reveal="left">
+        <div class="spec-disc">
+          <img src="assets/cut/airedale.webp" width="1131" height="1076" loading="lazy" alt="A hand-stripped Airedale terrier, side view">
+        </div>
+        <div class="spec-text">
+          <h3>Hand-stripping</h3>
+          <p>Hand-stripping terrier specialist. Airedales, schnauzers, Dandie Dinmonts and other wiry coats.</p>
+        </div>
+      </article>
+
+      <article class="spec spec--flip" data-reveal="right">
+        <div class="spec-disc spec-disc--empty">
+          <span class="gap">[Cat photo needed]</span>
+        </div>
+        <div class="spec-text">
+          <h3>Low stress cat grooming</h3>
+          <p>Cat grooming kept calm and low stress. Text to ask about your cat.</p>
+        </div>
+      </article>
+
+      <article class="spec" data-reveal="left">
+        <div class="spec-disc">
+          <img src="assets/cut/cocker-pair.webp" width="1295" height="989" loading="lazy" alt="Two black cocker spaniels in lemon print bandanas">
+        </div>
+        <div class="spec-text">
+          <h3>All sizes, all species</h3>
+          <p>Professional groomer for all sizes and species: dogs, cats, rabbits and birds.</p>
+        </div>
+      </article>
     </div>
   </section>
 
-  <section class="section" id="work" aria-labelledby="work-h">
-    <div class="wrap">
-      <div class="section-head" data-reveal="zoom">
-        <h2 id="work-h" data-words>Fresh off the table</h2>
+  <section class="sec sec--white" id="work" aria-labelledby="work-h">
+    <header class="sec-head" data-reveal="fade">
+      <h2 id="work-h" data-words>Fresh off the table</h2>
+      <svg class="laurel" aria-hidden="true"><use href="#laurel"/></svg>
+    </header>
+
+    <div class="gallery" data-gallery>
+      <div class="g-row" data-row>
+        <div class="g-bar">
+          <button class="g-btn" type="button" data-dir="-1" aria-label="Earlier photos, row 1" disabled><svg aria-hidden="true"><use href="#chev-l"/></svg></button>
+          <button class="g-btn" type="button" data-dir="1" aria-label="More photos, row 1"><svg aria-hidden="true"><use href="#chev-r"/></svg></button>
+        </div>
+        <ul class="g-track" data-track aria-label="Photos, row 1">
+          <li><button class="photo" type="button" data-full="assets/fb-1091987893361872.jpg" data-caption="Cavalier with long feathered ears"><img src="assets/g/fb-1091987893361872.webp" width="640" height="817" loading="lazy" decoding="async" alt="A blenheim cavalier with long wavy ears standing on a grooming table"><span class="cap" aria-hidden="true">Cavalier with long feathered ears</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1046168561277139.jpg" data-caption="Black terrier, tongue out"><img src="assets/g/fb-1046168561277139.webp" width="640" height="718" loading="lazy" decoding="async" alt="A black terrier with its tongue out, sitting on a grooming table"><span class="cap" aria-hidden="true">Black terrier, tongue out</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1044832471410748.jpg" data-caption="Apricot doodle, head tilt"><img src="assets/g/fb-1044832471410748.webp" width="640" height="853" loading="lazy" decoding="async" alt="An apricot doodle with a white chest, sitting and tilting its head"><span class="cap" aria-hidden="true">Apricot doodle, head tilt</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1164155372811790.jpg" data-caption="Airedale, side view"><img src="assets/g/fb-1164155372811790.webp" width="640" height="640" loading="lazy" decoding="async" alt="An Airedale terrier standing square on a path, side view" style="object-position:62% 50%"><span class="cap" aria-hidden="true">Airedale, side view</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1145296951364299.jpg" data-caption="Shih tzu with a short trim"><img src="assets/g/fb-1145296951364299.webp" width="640" height="640" loading="lazy" decoding="async" alt="A white shih tzu with a short trim, smiling with its tongue out"><span class="cap" aria-hidden="true">Shih tzu with a short trim</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1147483751145619.jpg" data-caption="Merle poodle, full body"><img src="assets/g/fb-1147483751145619.webp" width="640" height="640" loading="lazy" decoding="async" alt="A merle poodle with a black and white clipped coat on a grooming table"><span class="cap" aria-hidden="true">Merle poodle, full body</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1145827107977950.jpg" data-caption="Schnauzer, side view"><img src="assets/g/fb-1145827107977950.webp" width="640" height="640" loading="lazy" decoding="async" alt="A salt and pepper schnauzer with a long beard, side view"><span class="cap" aria-hidden="true">Schnauzer, side view</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1143617634865564.jpg" data-caption="Golden retriever in a tropical bandana"><img src="assets/g/fb-1143617634865564.webp" width="640" height="853" loading="lazy" decoding="async" alt="A golden retriever in a blue tropical bandana, smiling on a grooming table"><span class="cap" aria-hidden="true">Golden retriever in a tropical bandana</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1164155379478456.jpg" data-caption="Dandie Dinmont, close up"><img src="assets/g/fb-1164155379478456.webp" width="640" height="640" loading="lazy" decoding="async" alt="Close up of a Dandie Dinmont terrier with a white topknot"><span class="cap" aria-hidden="true">Dandie Dinmont, close up</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1141691908391470.jpg" data-caption="Brown curly coat, sitting pretty"><img src="assets/g/fb-1141691908391470.webp" width="640" height="726" loading="lazy" decoding="async" alt="A brown curly coated dog with rounded ears, sitting on a grooming table"><span class="cap" aria-hidden="true">Brown curly coat, sitting pretty</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1149140327646628.jpg" data-caption="Two cockers in lemon bandanas"><img src="assets/g/fb-1149140327646628.webp" width="640" height="476" loading="lazy" decoding="async" alt="Two black cocker spaniels in lemon print bandanas sitting side by side" style="object-position:28% 45%"><span class="cap" aria-hidden="true">Two cockers in lemon bandanas</span></button></li>
+        </ul>
       </div>
-    </div>
-    <div class="wrap wrap--gallery">
-      <div class="gallery" data-gallery data-drift>
 
-        <div class="g-row" data-row>
-          <div class="g-bar" data-reveal="fade">
-            <span class="g-line" aria-hidden="true"><i></i></span>
-            <div class="g-arrows">
-              <button class="g-btn" type="button" data-dir="-1" aria-label="Earlier photos, row 1" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="g-btn" type="button" data-dir="1" aria-label="More photos, row 1"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            </div>
-          </div>
-          <ul class="g-track" data-track data-reveal-group="4" aria-label="Photos, row 1">
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1091987893361872.jpg" data-caption="Cavalier with long feathered ears">
-                <img src="assets/fb-1091987893361872.jpg" width="1440" height="1838" loading="lazy" decoding="async" alt="A blenheim cavalier with long wavy ears standing on a grooming table">
-                <span class="photo-cap" aria-hidden="true">Cavalier with long feathered ears</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1046168561277139.jpg" data-caption="Black terrier, tongue out">
-                <img src="assets/fb-1046168561277139.jpg" width="1283" height="1440" loading="lazy" decoding="async" alt="A black terrier with its tongue out, sitting on a grooming table">
-                <span class="photo-cap" aria-hidden="true">Black terrier, tongue out</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1044832471410748.jpg" data-caption="Apricot doodle, head tilt">
-                <img src="assets/fb-1044832471410748.jpg" width="1080" height="1440" loading="lazy" decoding="async" alt="An apricot doodle with a white chest and rounded ears, sitting and tilting its head">
-                <span class="photo-cap" aria-hidden="true">Apricot doodle, head tilt</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1164155372811790.jpg" data-caption="Airedale, side view">
-                <img src="assets/fb-1164155372811790.jpg" width="1440" height="1441" loading="lazy" decoding="async" alt="An airedale terrier standing square on a path, side view, head up" style="object-position:68% 50%">
-                <span class="photo-cap" aria-hidden="true">Airedale, side view</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1145296951364299.jpg" data-caption="Shih tzu with a short trim">
-                <img src="assets/fb-1145296951364299.jpg" width="1440" height="1440" loading="lazy" decoding="async" alt="A white shih tzu with a short trim, smiling with its tongue out">
-                <span class="photo-cap" aria-hidden="true">Shih tzu with a short trim</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1147483751145619.jpg" data-caption="Merle poodle, full body">
-                <img src="assets/fb-1147483751145619.jpg" width="1440" height="1440" loading="lazy" decoding="async" alt="A merle poodle with a black and white clipped coat standing on a grooming table">
-                <span class="photo-cap" aria-hidden="true">Merle poodle, full body</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1145827107977950.jpg" data-caption="Schnauzer, side view">
-                <img src="assets/fb-1145827107977950.jpg" width="1440" height="1440" loading="lazy" decoding="async" alt="A salt and pepper schnauzer with a long beard, standing in side view">
-                <span class="photo-cap" aria-hidden="true">Schnauzer, side view</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1143617634865564.jpg" data-caption="Golden retriever in a tropical bandana">
-                <img src="assets/fb-1143617634865564.jpg" width="1536" height="2048" loading="lazy" decoding="async" alt="A golden retriever in a blue tropical bandana, smiling on a grooming table">
-                <span class="photo-cap" aria-hidden="true">Golden retriever in a tropical bandana</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1164155379478456.jpg" data-caption="Dandie Dinmont, close up">
-                <img src="assets/fb-1164155379478456.jpg" width="1440" height="1440" loading="lazy" decoding="async" alt="Close up of a Dandie Dinmont terrier with a white topknot looking at the camera">
-                <span class="photo-cap" aria-hidden="true">Dandie Dinmont, close up</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1141691908391470.jpg" data-caption="Brown curly coat, sitting pretty">
-                <img src="assets/fb-1141691908391470.jpg" width="1440" height="1634" loading="lazy" decoding="async" alt="A brown curly coated dog with rounded ears, sitting on a grooming table">
-                <span class="photo-cap" aria-hidden="true">Brown curly coat, sitting pretty</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1149140327646628.jpg" data-caption="Two cockers in lemon bandanas">
-                <img src="assets/fb-1149140327646628.jpg" width="1440" height="1070" loading="lazy" decoding="async" alt="Two black cocker spaniels in lemon print bandanas sitting side by side" style="object-position:28% 45%">
-                <span class="photo-cap" aria-hidden="true">Two cockers in lemon bandanas</span>
-              </button>
-            </li>
-          </ul>
+      <div class="g-row" data-row>
+        <div class="g-bar">
+          <button class="g-btn" type="button" data-dir="-1" aria-label="Earlier photos, row 2" disabled><svg aria-hidden="true"><use href="#chev-l"/></svg></button>
+          <button class="g-btn" type="button" data-dir="1" aria-label="More photos, row 2"><svg aria-hidden="true"><use href="#chev-r"/></svg></button>
         </div>
-
-        <div class="g-row" data-row>
-          <div class="g-bar" data-reveal="fade">
-            <span class="g-line" aria-hidden="true"><i></i></span>
-            <div class="g-arrows">
-              <button class="g-btn" type="button" data-dir="-1" aria-label="Earlier photos, row 2" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="g-btn" type="button" data-dir="1" aria-label="More photos, row 2"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            </div>
-          </div>
-          <ul class="g-track" data-track data-reveal-group="4" aria-label="Photos, row 2">
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1156259996934661.jpg" data-caption="Shih tzu in a polka dot bandana">
-                <img src="assets/fb-1156259996934661.jpg" width="1440" height="1684" loading="lazy" decoding="async" alt="A cream shih tzu in a green polka dot bandana, smiling">
-                <span class="photo-cap" aria-hidden="true">Shih tzu in a polka dot bandana</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1142223735004954.jpg" data-caption="Black terrier in a leaf bandana">
-                <img src="assets/fb-1142223735004954.jpg" width="1440" height="1440" loading="lazy" decoding="async" alt="A black terrier with upright ears in a green leaf print bandana">
-                <span class="photo-cap" aria-hidden="true">Black terrier in a leaf bandana</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1153534513873876.jpg" data-caption="Apricot poodle, all fluff">
-                <img src="assets/fb-1153534513873876.jpg" width="1440" height="1621" loading="lazy" decoding="async" alt="An apricot poodle with a round fluffy face looking up from a grooming table">
-                <span class="photo-cap" aria-hidden="true">Apricot poodle, all fluff</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1145827114644616.jpg" data-caption="Schnauzer, front view">
-                <img src="assets/fb-1145827114644616.jpg" width="1440" height="1440" loading="lazy" decoding="async" alt="A salt and pepper schnauzer standing on a grooming table, front view">
-                <span class="photo-cap" aria-hidden="true">Schnauzer, front view</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1065219976038664.jpg" data-caption="Golden dog, ears up">
-                <img src="assets/fb-1065219976038664.jpg" width="1103" height="1440" loading="lazy" decoding="async" alt="A golden dog with tall ears sitting on a grooming table, mouth open">
-                <span class="photo-cap" aria-hidden="true">Golden dog, ears up</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1164155376145123.jpg" data-caption="Dandie Dinmont, side view">
-                <img src="assets/fb-1164155376145123.jpg" width="1440" height="1441" loading="lazy" decoding="async" alt="A grey and white Dandie Dinmont terrier standing in side view on pavement">
-                <span class="photo-cap" aria-hidden="true">Dandie Dinmont, side view</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1146529021241092.jpg" data-caption="Wheaten terrier, short trim">
-                <img src="assets/fb-1146529021241092.jpg" width="1440" height="1440" loading="lazy" decoding="async" alt="A wheaten terrier with a short trim sitting on a grooming table, tongue out">
-                <span class="photo-cap" aria-hidden="true">Wheaten terrier, short trim</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1091987896695205.jpg" data-caption="Cavalier, front view">
-                <img src="assets/fb-1091987896695205.jpg" width="1440" height="1838" loading="lazy" decoding="async" alt="A blenheim cavalier with long brushed ears, front view">
-                <span class="photo-cap" aria-hidden="true">Cavalier, front view</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1145827111311283.jpg" data-caption="Schnauzer in a plum collar">
-                <img src="assets/fb-1145827111311283.jpg" width="1440" height="1440" loading="lazy" decoding="async" alt="A salt and pepper schnauzer in a plum collar standing on a grooming table">
-                <span class="photo-cap" aria-hidden="true">Schnauzer in a plum collar</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-439297005297634.jpg" data-caption="Shih tzu with a long coat">
-                <img src="assets/fb-439297005297634.jpg" width="1080" height="1067" loading="lazy" decoding="async" alt="Close up of a shih tzu with a long parted coat on a lilac table">
-                <span class="photo-cap" aria-hidden="true">Shih tzu with a long coat</span>
-              </button>
-            </li>
-            <li class="g-item" data-reveal="scale">
-              <button class="photo" type="button" data-tilt data-parallax data-lightbox="assets/fb-1079747734585888.jpg" data-caption="Dandie Dinmont, profile">
-                <img src="assets/fb-1079747734585888.jpg" width="1440" height="1440" loading="lazy" decoding="async" alt="A white Dandie Dinmont terrier with a rounded topknot, side view" style="object-position:40% 50%">
-                <span class="photo-cap" aria-hidden="true">Dandie Dinmont, profile</span>
-              </button>
-            </li>
-          </ul>
-        </div>
-
+        <ul class="g-track" data-track aria-label="Photos, row 2">
+          <li><button class="photo" type="button" data-full="assets/fb-1156259996934661.jpg" data-caption="Shih tzu in a polka dot bandana"><img src="assets/g/fb-1156259996934661.webp" width="640" height="748" loading="lazy" decoding="async" alt="A cream shih tzu in a green polka dot bandana, smiling"><span class="cap" aria-hidden="true">Shih tzu in a polka dot bandana</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1142223735004954.jpg" data-caption="Black terrier in a leaf bandana"><img src="assets/g/fb-1142223735004954.webp" width="640" height="640" loading="lazy" decoding="async" alt="A black terrier with upright ears in a green leaf print bandana"><span class="cap" aria-hidden="true">Black terrier in a leaf bandana</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1153534513873876.jpg" data-caption="Apricot poodle, all fluff"><img src="assets/g/fb-1153534513873876.webp" width="640" height="720" loading="lazy" decoding="async" alt="An apricot poodle with a round fluffy face looking up from a grooming table"><span class="cap" aria-hidden="true">Apricot poodle, all fluff</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1145827114644616.jpg" data-caption="Schnauzer, front view"><img src="assets/g/fb-1145827114644616.webp" width="640" height="640" loading="lazy" decoding="async" alt="A salt and pepper schnauzer standing on a grooming table, front view"><span class="cap" aria-hidden="true">Schnauzer, front view</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1065219976038664.jpg" data-caption="Golden dog, ears up"><img src="assets/g/fb-1065219976038664.webp" width="640" height="835" loading="lazy" decoding="async" alt="A golden dog with tall ears sitting on a grooming table, mouth open"><span class="cap" aria-hidden="true">Golden dog, ears up</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1164155376145123.jpg" data-caption="Dandie Dinmont, side view"><img src="assets/g/fb-1164155376145123.webp" width="640" height="640" loading="lazy" decoding="async" alt="A grey and white Dandie Dinmont terrier standing in side view on pavement"><span class="cap" aria-hidden="true">Dandie Dinmont, side view</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1146529021241092.jpg" data-caption="Wheaten terrier, short trim"><img src="assets/g/fb-1146529021241092.webp" width="640" height="640" loading="lazy" decoding="async" alt="A wheaten terrier with a short trim sitting on a grooming table, tongue out"><span class="cap" aria-hidden="true">Wheaten terrier, short trim</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1091987896695205.jpg" data-caption="Cavalier, front view"><img src="assets/g/fb-1091987896695205.webp" width="640" height="817" loading="lazy" decoding="async" alt="A blenheim cavalier with long brushed ears, front view"><span class="cap" aria-hidden="true">Cavalier, front view</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1145827111311283.jpg" data-caption="Schnauzer in a plum collar"><img src="assets/g/fb-1145827111311283.webp" width="640" height="640" loading="lazy" decoding="async" alt="A salt and pepper schnauzer in a plum collar standing on a grooming table"><span class="cap" aria-hidden="true">Schnauzer in a plum collar</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-439297005297634.jpg" data-caption="Shih tzu with a long coat"><img src="assets/g/fb-439297005297634.webp" width="640" height="632" loading="lazy" decoding="async" alt="Close up of a shih tzu with a long parted coat on a lilac table"><span class="cap" aria-hidden="true">Shih tzu with a long coat</span></button></li>
+          <li><button class="photo" type="button" data-full="assets/fb-1079747734585888.jpg" data-caption="Dandie Dinmont, profile"><img src="assets/g/fb-1079747734585888.webp" width="640" height="640" loading="lazy" decoding="async" alt="A white Dandie Dinmont terrier with a rounded topknot, side view" style="object-position:40% 50%"><span class="cap" aria-hidden="true">Dandie Dinmont, profile</span></button></li>
+        </ul>
       </div>
     </div>
   </section>
 
   <dialog class="lightbox" id="lightbox" aria-label="Photo">
     <button class="lb-close" type="button" aria-label="Close photo">&times;</button>
-    <button class="lb-nav lb-prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <button class="lb-nav lb-next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <img src="" alt="">
-    <p></p>
+    <button class="lb-nav lb-prev" type="button" aria-label="Previous photo"><svg aria-hidden="true"><use href="#chev-l"/></svg></button>
+    <button class="lb-nav lb-next" type="button" aria-label="Next photo"><svg aria-hidden="true"><use href="#chev-r"/></svg></button>
+    <figure><img src="" alt=""><figcaption></figcaption></figure>
   </dialog>
 
-  <section class="section section--alt has-drops" id="reviews" aria-labelledby="reviews-h">
-    <div class="drops" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-    <div class="wrap">
-      <div class="section-head" data-reveal="tilt">
-        <h2 id="reviews-h" data-words>Kind words</h2>
-      </div>
-      <ul class="reviews" data-reviews>
-        <li class="rv">
-          <figure class="review" data-spot data-tilt>
-            <span class="stars" style="--stars:5" role="img" aria-label="5 out of 5 stars"></span>
-            <blockquote><p>Always love the work she does with our Shi Tzu!</p></blockquote>
-            <figcaption>
-              <span class="rv-by">Adam</span>
-              <span class="rv-meta">Google review</span>
-              <a class="rv-link" href="https://www.google.com/maps/place/BFF+Groomer+-+All+Species+Pets/data=!4m7!3m6!1s0x89d35100574dcf7d:0x401bd1b050e13bfa!8m2!3d43.1651576!4d-79.2425087!16s%2Fg%2F11yr9mnyr_!19sChIJfc9NVwBR04kR-jvhULDRG0A?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MTAxMi4wIJJjKgBIAVAD&amp;rclk=1" rel="noopener">Read it on Google</a>
-            </figcaption>
-            <button class="rv-open" type="button" aria-haspopup="dialog"><span class="sr">Open this review</span></button>
-          </figure>
-        </li>
-      </ul>
-    </div>
+  <section class="sec sec--lilac" id="reviews" aria-labelledby="rev-h">
+    <div class="orbs orbs--soft" aria-hidden="true"><i></i><i></i><i></i></div>
+    <header class="sec-head" data-reveal="fade">
+      <h2 id="rev-h" data-words>Kind words</h2>
+      <svg class="laurel" aria-hidden="true"><use href="#laurel"/></svg>
+    </header>
+    <figure class="review" data-reveal="pop">
+      <span class="stars" role="img" aria-label="5 out of 5 stars"><i></i><i></i><i></i><i></i><i></i></span>
+      <blockquote><p>Always love the work she does with our Shi Tzu!</p></blockquote>
+      <figcaption>
+        <span class="rv-by">Adam</span>
+        <span class="rv-meta">Google review</span>
+        <a class="rv-link" href="https://www.google.com/maps/place/BFF+Groomer+-+All+Species+Pets/data=!4m7!3m6!1s0x89d35100574dcf7d:0x401bd1b050e13bfa!8m2!3d43.1651576!4d-79.2425087!16s%2Fg%2F11yr9mnyr_!19sChIJfc9NVwBR04kR-jvhULDRG0A?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MTAxMi4wIJJjKgBIAVAD&amp;rclk=1" rel="noopener">Read it on Google</a>
+      </figcaption>
+    </figure>
   </section>
 
-  <dialog class="rv-dialog" id="rv-dialog" aria-label="Review">
-    <button class="dlg-close" type="button" aria-label="Close review">&times;</button>
-    <div class="rv-dialog-body"></div>
-  </dialog>
-
-  <figure class="band" data-parallax data-reveal="curtain">
-    <img src="assets/fb-1149140327646628.jpg" width="1440" height="1070" loading="lazy" decoding="async" alt="Two black cocker spaniels in lemon print bandanas sitting side by side" style="object-position:50% 30%">
-  </figure>
-
-  <section class="section" id="about" aria-labelledby="about-h">
-    <div class="wrap">
-      <div class="section-head" data-reveal="fade">
-        <h2 id="about-h" data-words>About BFF Groomer</h2>
+  <section class="sec sec--mist" id="find" aria-labelledby="find-h">
+    <header class="sec-head" data-reveal="fade">
+      <h2 id="find-h" data-words>Find us</h2>
+      <svg class="laurel" aria-hidden="true"><use href="#laurel"/></svg>
+    </header>
+    <div class="find">
+      <div class="find-card" data-reveal="right">
+        <p class="find-where">Home-based salon in downtown St. Catharines.</p>
+        <dl class="hours">
+          <div><dt>Booking</dt><dd>By text or email only</dd></div>
+          <div><dt>Hours</dt><dd><span class="gap">[Hours to confirm]</span></dd></div>
+          <div><dt>Area</dt><dd>Downtown St. Catharines</dd></div>
+        </dl>
+        <a class="btn btn-violet" href="https://www.google.com/maps/place/BFF+Groomer+-+All+Species+Pets/data=!4m7!3m6!1s0x89d35100574dcf7d:0x401bd1b050e13bfa!8m2!3d43.1651576!4d-79.2425087!16s%2Fg%2F11yr9mnyr_!19sChIJfc9NVwBR04kR-jvhULDRG0A?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MTAxMi4wIJJjKgBIAVAD&amp;rclk=1" rel="noopener">Open in Google Maps</a>
       </div>
-      <div class="prose" data-reveal="up">
-        <p>BFF Groomer is a home-based salon in downtown St. Catharines. It grooms dogs, cats, rabbits and birds, with a speciality in hand-stripping terriers and low stress grooming for cats. Booking is by text or email only.</p>
+      <div class="map" data-reveal="left">
+        <iframe title="Map of downtown St. Catharines" src="https://www.google.com/maps?q=BFF+Groomer+-+All+Species+Pets,+St.+Catharines&amp;z=14&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </section>
 
-  <section class="section section--alt" id="visit" aria-labelledby="visit-h">
-    <div class="wrap">
-      <div class="section-head" data-reveal="draw">
-        <h2 id="visit-h" data-words>Find and book</h2>
-      </div>
-      <div class="visit">
-        <div class="visit-card" data-reveal="right" data-spot>
-          <address>Home-based salon in downtown St. Catharines</address>
-          <p><a href="sms:+12899909308">Text 289-990-9308</a></p>
-          <p><a data-mail href="#contact">Email</a></p>
-          <p class="map-link"><a class="btn btn-primary" href="https://www.google.com/maps/place/BFF+Groomer+-+All+Species+Pets/data=!4m7!3m6!1s0x89d35100574dcf7d:0x401bd1b050e13bfa!8m2!3d43.1651576!4d-79.2425087!16s%2Fg%2F11yr9mnyr_!19sChIJfc9NVwBR04kR-jvhULDRG0A?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MTAxMi4wIJJjKgBIAVAD&amp;rclk=1" rel="noopener">Open in Google Maps</a></p>
-        </div>
-        <div class="visit-hours" data-reveal="left">
-          <table class="hours" data-hours data-tz="America/Toronto" data-confirmed="false">
-            <caption class="sr">Booking and hours</caption>
-            <tbody>
-              <tr><th scope="row">Booking</th><td>By text or email only</td></tr>
-              <tr><th scope="row">Hours</th><td><span class="gap">[Hours to confirm]</span></td></tr>
-              <tr><th scope="row">Area</th><td>Downtown St. Catharines</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="contact" aria-labelledby="contact-h">
-    <div class="wrap">
-      <div class="section-head" data-reveal="zoom">
-        <h2 id="contact-h" data-words>Book a groom</h2>
-        <p>Text <a href="sms:+12899909308">289-990-9308</a> or <a data-mail href="#contact">email</a> to book. You can also leave your details here.</p>
+  <section class="sec sec--plum" id="book" aria-labelledby="book-h">
+    <div class="orbs orbs--dark" aria-hidden="true"><i></i><i></i><i></i></div>
+    <header class="sec-head sec-head--light" data-reveal="fade">
+      <h2 id="book-h" data-words>Book a groom</h2>
+      <svg class="laurel" aria-hidden="true"><use href="#laurel"/></svg>
+    </header>
+    <div class="book">
+      <div class="book-lead" data-reveal="up">
+        <p>Text <a href="sms:+12899909308">289-990-9308</a> or <a data-mail href="#book">email</a> to book. You can also leave your details here.</p>
+        <img class="book-dog" src="assets/cut/golden-mix.webp" width="503" height="1200" loading="lazy" alt="">
       </div>
       <form class="form" id="contact-form" novalidate data-reveal="up">
         <div class="field">
@@ -363,7 +270,7 @@
         </div>
         <div class="field">
           <label for="f-reach">Phone or email</label>
-          <input id="f-reach" name="reach" type="text" autocomplete="email" inputmode="email" aria-describedby="e-reach">
+          <input id="f-reach" name="reach" type="text" autocomplete="email" aria-describedby="e-reach">
           <p class="err" id="e-reach"></p>
         </div>
         <div class="field">
@@ -373,7 +280,7 @@
           <p class="err" id="e-need"></p>
         </div>
         <div class="hp" aria-hidden="true"><label>Leave empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-        <button class="btn btn-primary" type="submit">Send</button>
+        <button class="btn btn-pale" type="submit">Send</button>
         <p class="status" id="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -381,31 +288,22 @@
 
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-grid" data-reveal-group>
-      <div data-reveal="fade">
-        <h2>BFF Groomer</h2>
-        <p>Home-based pet grooming in downtown St. Catharines.</p>
-      </div>
-      <div data-reveal="fade">
-        <address>Downtown St. Catharines</address>
-        <p><a href="sms:+12899909308">Text 289-990-9308</a></p>
-      </div>
-      <nav class="footer-links" aria-label="Footer" data-reveal="fade">
-        <a href="#services">Services</a>
-        <a href="#work">Photos</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#visit">Book</a>
-        <a href="#contact">Contact</a>
-        <a href="https://www.instagram.com/bffgroomer/" rel="noopener">Instagram</a>
-        <a href="https://www.facebook.com/bffgroomer/" rel="noopener">Facebook</a>
-      </nav>
-    </div>
-    <p class="fine">BFF Groomer, St. Catharines. Site by Haydn McIntyre.</p>
-  </div>
+<footer class="foot">
+  <img class="foot-logo" src="assets/brand/logo-256.webp" width="256" height="256" loading="lazy" alt="BFF Groomer, All Species Pets">
+  <nav class="foot-links" aria-label="Footer">
+    <a href="#specialties">Specialties</a>
+    <a href="#work">Work</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#find">Find us</a>
+    <a href="#book">Book</a>
+    <a href="https://www.instagram.com/bffgroomer/" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/bffgroomer/" rel="noopener">Facebook</a>
+  </nav>
+  <p class="fine">BFF Groomer, downtown St. Catharines. Site by Haydn McIntyre.</p>
 </footer>
 
-<script src="main.js?v=3" defer></script>
+<a class="book-bar" href="sms:+12899909308" tabindex="-1" aria-hidden="true">Text to book <span>289-990-9308</span></a>
+
+<script src="main.js?v=7" defer></script>
 </body>
 </html>
