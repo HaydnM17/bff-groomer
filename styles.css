@@ -209,25 +209,21 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
 @keyframes rock { from { rotate: -2.6deg; } to { rotate: 2.6deg; } }
 .pup-img { display: block; width: 100%; height: 100%; filter: drop-shadow(0 18px 24px rgba(20, 6, 40, .45)); }
 
-/* name tag: hangs from a gold ring at --tx/--ty on the sticker and swings against the rock */
+/* name label: a framed plate in front of the dog's feet. It sits inside .pup-rock, so it rocks with the dog,
+   and it pops in a beat after each new dog arrives. */
 .tag {
-  position: absolute; z-index: 2; left: var(--tx); top: var(--ty); margin: 0;
-  translate: -50% 0; transform-origin: 50% 0;
-  animation: swing 5.6s cubic-bezier(.37, 0, .63, 1) -1.4s infinite alternate;
+  position: absolute; z-index: 2; left: 50%; bottom: 2%; margin: 0;
+  translate: -50% 0; transform-origin: 50% 100%;
+  display: grid; justify-items: center; gap: 5px; min-width: 150px; padding: 12px 22px 11px;
+  background: var(--white); color: var(--plum); border-radius: 12px; text-align: center; white-space: nowrap;
+  outline: 1px solid rgba(224, 154, 82, .65); outline-offset: -5px;
+  box-shadow: 0 14px 28px -12px rgba(20, 6, 40, .6), 0 4px 10px -4px rgba(20, 6, 40, .35);
 }
-.tag::before {
-  content: ""; position: absolute; left: 50%; top: -10px; width: 14px; height: 14px; translate: -50% 0;
-  border: 2px solid var(--gold); border-radius: 50%;
-}
-.tag-name {
-  display: block; padding: 16px 13px 9px; border-radius: 11px; white-space: nowrap;
-  font: 500 .64rem/1 var(--display); letter-spacing: .18em; text-transform: uppercase; color: var(--plum);
-  background: linear-gradient(180deg, var(--white), var(--lilac));
-  -webkit-mask: radial-gradient(circle 3.5px at 50% 7px, transparent 97%, #000 100%);
-  mask: radial-gradient(circle 3.5px at 50% 7px, transparent 97%, #000 100%);
-  filter: drop-shadow(0 8px 10px rgba(20, 6, 40, .4));
-}
-@keyframes swing { from { rotate: 8deg; } to { rotate: -8deg; } }
+.pup .tag { opacity: 0; scale: .9; transition: opacity .3s ease, scale .3s var(--ease-out); }
+.pup.is-active .tag { opacity: 1; scale: 1; transition: opacity .45s ease .3s, scale .6s var(--ease-back) .3s; }
+.tag-name { font: 400 1.15rem/1.1 var(--display); letter-spacing: .14em; text-transform: uppercase; margin-right: -.14em; }
+.tag-laurel { display: block; width: 66px; height: 12px; color: var(--gold); fill: currentColor; }
+.tag-breed { font: 500 .6rem/1 var(--display); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft); margin-right: -.26em; }
 
 /* controls: previous, pause with the slide timer ring, next, and a counter */
 @property --ring { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
@@ -282,7 +278,9 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
   .lede { font-size: 1.05rem; }
   .hero-actions { margin-top: 34px; }
   .pack { position: absolute; left: max(32px, 4vw); width: 44vw; top: 118px; bottom: 66px; margin: 0; min-height: 0; }
-  .tag-name { font-size: .7rem; padding: 17px 15px 10px; }
+  .tag { padding: 14px 28px 13px; min-width: 180px; }
+  .tag-name { font-size: 1.35rem; }
+  .tag-breed { font-size: .64rem; }
   /* circles stay low and left so the copy keeps full contrast */
   .orbs i:nth-child(1) { width: 56vw; height: 56vw; left: 46%; bottom: -41vw; }
   .orbs i:nth-child(2) { width: 30vw; height: 30vw; left: 72%; bottom: -15vw; }
@@ -608,7 +606,7 @@ main { position: relative; }
 .still .spec .spec-disc img { opacity: 1 !important; transform: translateX(-50%) !important; transition: none !important; }
 .still .orbs i, .still .scroll-cue svg, .still .review, .still .pup-rock, .still .tag, .still .pause-ring { animation: none !important; }
 .still .pack-stage { opacity: 1 !important; translate: none !important; transition: none !important; }
-.still .pup, .still .slide-bg { transition: none !important; }
+.still .pup, .still .slide-bg, .still .tag { transition: none !important; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js [data-enter], .js [data-reveal], .js .g-track li, .js [data-words] .w > span,
@@ -616,6 +614,7 @@ main { position: relative; }
   .js .spec .spec-disc img { opacity: 1 !important; transform: translateX(-50%) !important; transition: none !important; }
   .orbs i, .scroll-cue svg, .review-wrap.is-in .review, .pup-rock, .tag, .pause-ring { animation: none !important; }
   .pup { transform: none !important; transition: opacity .3s ease !important; }
+  .tag { scale: 1 !important; transition: opacity .3s ease !important; }
   .slide-bg { transform: none !important; transition: opacity .3s ease !important; }
   .photo, .review, .spec-disc img { transition: none !important; }
   .btn::after, .pause { display: none; }
