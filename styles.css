@@ -541,6 +541,8 @@ main { position: relative; }
 .foot-links a { text-decoration: none; font: 400 .74rem/1 var(--display); letter-spacing: .3em; text-transform: uppercase; padding: 8px 0; }
 .foot-links a:hover { color: var(--white); }
 .fine { font-size: .82rem; color: rgba(239, 230, 255, .6); margin: 0; }
+.credit { margin: 10px 0 0; font-size: .74rem; color: rgba(239, 230, 255, .6); }
+.credit a { color: inherit; text-underline-offset: 2px; }
 @media (min-width: 900px) { .foot { padding-bottom: 56px; } }
 
 /* ---------- phone book bar ---------- */
