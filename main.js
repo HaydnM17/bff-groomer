@@ -280,37 +280,57 @@
     }
   }
 
-  /* ---------- the bubble world behind the page ----------
-     Big soap bubbles and grooming tools sit along the edges, each at its own depth. Scrolling carries
-     them past at their own speeds and wraps them round, fast scrolling stretches the bubbles and spins
-     the tools, and the mouse leans the whole field. Small bubbles rise through the middle. */
-  var env = qs('.env'), envItems = [], envRise = null;
+  /* ---------- the grooming world behind the page ----------
+     Grooming tools lead: scissors that snip (faster while you scroll), combs, clippers and slicker
+     brushes, each at its own depth. Soft tufts of trimmed fur drift down past them, and a few soap
+     bubbles float behind. Scrolling carries everything past at its own speed and wraps it round,
+     fast scrolling stretches the bubbles and spins the tools, and the mouse leans the whole field. */
+  var env = qs('.env'), envItems = [], envRise = null, envFall = null;
   var mouse = { tx: 0, ty: 0, x: 0, y: 0 };
   var vw = window.innerWidth, vh = window.innerHeight;
   function rnd(a, b) { return a + Math.random() * (b - a); }
+  var SNIPS = '<svg class="snips" viewBox="0 0 48 48">' +
+    '<g class="blade blade-a"><path d="M24.6 26.5C25.8 18 27 10.6 28.4 3.8c-2.6 6.4-4.6 14-5.6 22.4z"/><path d="M23.4 27.6 17.6 34.4"/><circle cx="14.6" cy="38.2" r="4.6"/></g>' +
+    '<g class="blade blade-b"><path d="M23.4 26.5C22.2 18 21 10.6 19.6 3.8c2.6 6.4 4.6 14 5.6 22.4z"/><path d="M24.6 27.6 30.4 34.4"/><circle cx="33.4" cy="38.2" r="4.6"/></g>' +
+    '<circle class="pivot" cx="24" cy="26.6" r="1.3"/></svg>';
+  var FUR = [
+    '<path d="M4 20c2-6 1-11 4-15M9 21c1-5 2-9 6-13M14 21c0-4 3-7 6-9"/>',
+    '<path d="M5 19c3-3 3-8 7-11 2-1.5 4-1 5 1M8 21c3-2 5-6 9-7 2-.4 3 .6 3 2"/>',
+    '<path d="M12 21c-1-5-5-6-6-11M12 21c0-5 2-9 1-14M12 21c2-4 6-6 6-11"/>'
+  ];
   if (env) {
     var small = vw < 900;
-    var toolNames = ['scissors', 'comb', 'brush', 'clippers', 'bone', 'paw'];
-    var nSoap = small ? 8 : 14, nTool = small ? 6 : 10, html = '';
+    var toolMix = ['snips', 'comb', 'snips', 'clippers', 'brush', 'snips', 'comb', 'clippers', 'brush', 'snips', 'comb', 'brush'];
+    var nSoap = small ? 4 : 7, nTool = small ? 7 : 12, html = '';
     for (var a = 0; a < nSoap + nTool; a++) {
-      var isSoap = a < nSoap;
-      var side = a % 2 === 0 ? rnd(-0.1, 0.09) : rnd(0.9, 1.08);
-      if (isSoap && a % 4 === 3) side = rnd(0.25, 0.75); // a few bubbles drift across the open sections; tools stay at the edges
-      var s = isSoap ? Math.round(rnd(small ? 70 : 110, small ? 190 : 330)) : Math.round(rnd(small ? 34 : 44, small ? 52 : 74));
-      envItems.push({ soap: isSoap, s: s, x: side, y0: rnd(0, 1), k: isSoap ? rnd(0.12, 0.38) : rnd(0.45, 0.8), rot: rnd(-35, 35) });
+      var isSoap = a < nSoap, name = isSoap ? '' : toolMix[(a - nSoap) % toolMix.length];
+      var side = a % 2 === 0 ? rnd(-0.08, 0.1) : rnd(0.9, 1.06);
+      if (isSoap && a % 3 === 2) side = rnd(0.25, 0.75); // a bubble or two drifts across the open sections
+      var s = isSoap ? Math.round(rnd(small ? 70 : 110, small ? 180 : 300))
+        : name === 'snips' ? Math.round(rnd(small ? 50 : 74, small ? 78 : 124))
+        : Math.round(rnd(small ? 40 : 56, small ? 60 : 92));
+      envItems.push({ soap: isSoap, s: s, x: side, y0: rnd(0, 1), k: isSoap ? rnd(0.12, 0.34) : rnd(0.45, 0.8), rot: rnd(-35, 35) });
       html += '<div class="env-item">' + (isSoap
         ? '<div class="soap" style="--s:' + s + 'px;--w:' + rnd(7, 12).toFixed(1) + 's"><i></i></div>'
-        : '<div class="tool" style="--s:' + s + 'px;--w:' + rnd(5, 9).toFixed(1) + 's"><svg><use href="#ic-' + toolNames[a % toolNames.length] + '"/></svg></div>') + '</div>';
+        : '<div class="tool" style="--s:' + s + 'px;--w:' + rnd(5, 9).toFixed(1) + 's;--snip:' + rnd(1.1, 1.8).toFixed(2) + 's">' +
+          (name === 'snips' ? SNIPS : '<svg><use href="#ic-' + name + '"/></svg>') + '</div>') + '</div>';
     }
     var rise = '';
-    for (var b = 0; b < (small ? 9 : 16); b++) {
+    for (var b = 0; b < (small ? 5 : 8); b++) {
       var bs = Math.round(8 + Math.pow(Math.random(), 2) * 40);
       rise += '<span class="bub" style="--x:' + (Math.random() * 96).toFixed(1) + '%;--s:' + bs + 'px;--d:' + rnd(12, 26).toFixed(1) +
         's;--delay:-' + rnd(0, 24).toFixed(1) + 's;--sw:' + rnd(2.6, 5).toFixed(1) + 's;--amp:' + Math.round(rnd(8, 30)) + 'px"><i></i></span>';
     }
-    env.innerHTML = html + '<div class="env-rise bubbles--light">' + rise + '</div>';
+    var fall = '', furColours = ['var(--gold)', 'var(--violet)', '#B98BFF', '#C98A4E'];
+    for (var f = 0; f < (small ? 8 : 14); f++) {
+      fall += '<span class="fur" style="--x:' + (Math.random() * 96).toFixed(1) + '%;--s:' + Math.round(rnd(small ? 22 : 28, small ? 38 : 52)) +
+        'px;--d:' + rnd(9, 18).toFixed(1) + 's;--delay:-' + rnd(0, 18).toFixed(1) + 's;--tw:' + rnd(2, 4).toFixed(1) + 's;--dx:' + Math.round(rnd(-70, 70)) +
+        'px;--o:' + rnd(0.4, 0.7).toFixed(2) + ';color:' + furColours[f % furColours.length] + '"><svg viewBox="0 0 24 24">' + FUR[f % FUR.length] + '</svg></span>';
+    }
+    env.innerHTML = html + '<div class="env-rise bubbles--light">' + rise + '</div><div class="env-fall">' + fall + '</div>';
     qsa('.env-item', env).forEach(function (el, i) { envItems[i].el = el; });
     envRise = qs('.env-rise', env);
+    envFall = qs('.env-fall', env);
   }
   function placeEnv(y, still) {
     var stretch = still ? 0 : Math.min(Math.abs(vel) * 0.01, 0.26);
@@ -324,10 +344,17 @@
       if (it.soap) it.el.style.scale = (1 - stretch * 0.4).toFixed(3) + ' ' + (1 + stretch).toFixed(3);
       else it.el.style.rotate = (it.rot + spin).toFixed(1) + 'deg';
     });
+    var push = still ? 0 : Math.max(-90, Math.min(90, vel * 2.6));
     if (envRise) {
       envRise.style.setProperty('--travel', -(vh + 160) + 'px');
-      envRise.style.translate = '0 ' + (still ? 0 : Math.max(-90, Math.min(90, vel * 2.6))).toFixed(1) + 'px';
+      envRise.style.translate = '0 ' + push.toFixed(1) + 'px';
     }
+    if (envFall) {
+      envFall.style.setProperty('--fall', (vh + 140) + 'px');
+      envFall.style.translate = '0 ' + (push * 0.7).toFixed(1) + 'px';
+    }
+    // the scissors snip faster while the page is moving
+    if (env) env.classList.toggle('is-fast', !still && Math.abs(vel) > 5);
   }
 
   /* ---------- the hero and booking circles answer the scroll too ---------- */
@@ -402,7 +429,7 @@
       });
       if (firstBad) { firstBad.focus(); return; }
       status.setAttribute('data-state', 'info');
-      status.textContent = 'This is a preview, so nothing was sent. To reach BFF Groomer, text 289-990-9308.';
+      status.textContent = 'This is a preview, so nothing was sent. To reach BFF Groomer, text 123-456-7890.';
     });
   }
 
