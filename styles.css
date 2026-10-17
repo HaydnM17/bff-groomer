@@ -103,7 +103,14 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
 .nav ul { list-style: none; margin: 0; padding: 0; }
 .nav a { text-decoration: none; font: 400 .78rem/1 var(--display); letter-spacing: .3em; text-transform: uppercase; }
 
-.menu { margin-left: auto; width: 48px; height: 48px; border: 0; background: none; display: grid; place-items: center; }
+.top-cta {
+  margin-left: auto; display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px;
+  background: var(--lilac); color: var(--plum); text-decoration: none; font: 500 .72rem/1 var(--display); letter-spacing: .2em; text-transform: uppercase;
+  transition: background-color .2s ease, transform .16s var(--ease-out);
+}
+.top-cta:active { transform: scale(.96); }
+.top.is-scrolled .top-cta { background: var(--violet); color: var(--white); }
+.menu { margin-left: 4px; width: 48px; height: 48px; border: 0; background: none; display: grid; place-items: center; }
 .menu-bars, .menu-bars::before, .menu-bars::after { display: block; width: 24px; height: 1.5px; background: currentColor; transition: transform .3s var(--ease-out), opacity .2s; }
 .menu-bars { position: relative; }
 .menu-bars::before, .menu-bars::after { content: ""; position: absolute; left: 0; }
@@ -127,7 +134,11 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
   .nav a { display: block; padding: 20px 0; font-size: .92rem; }
 }
 @media (min-width: 900px) {
-  .menu { display: none; }
+  .menu, .top-cta { display: none; }
+  .nav .nav-cta { padding: 10px 18px; border: 1px solid currentColor; border-radius: 999px; }
+  .nav .nav-cta::after { display: none; }
+  .top.is-scrolled .nav .nav-cta { background: var(--violet); border-color: var(--violet); color: var(--white); }
+  @media (hover: hover) and (pointer: fine) { .nav .nav-cta:hover { background: var(--lilac); border-color: var(--lilac); color: var(--plum); } }
   .nav ul { display: flex; gap: 40px; }
   .nav a { position: relative; padding: 8px 0; }
   .nav a::after { content: ""; position: absolute; left: 0; right: .3em; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: 0 50%; transition: transform .35s var(--ease-out); }
@@ -213,6 +224,7 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
   transition: text-decoration-color .25s ease;
 }
 .booking-number:hover { text-decoration-color: rgba(239, 230, 255, .7); }
+.booking-title { margin: 0 0 6px; font: 300 clamp(1.6rem, 6.6vw, 2.3rem)/1.15 var(--display); color: var(--white); letter-spacing: .02em; }
 .booking-note { margin: 0 0 14px; font-size: .92rem; color: rgba(255, 255, 255, .92); }
 .booking-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
@@ -289,7 +301,7 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
   .hero h1 { font-size: 11vw; letter-spacing: .08em; margin-right: -.08em; white-space: nowrap; margin-bottom: 8px; }
   .hero-tagline { margin-bottom: 16px; }
   /* a size container needs a definite height, and a column flex item inside a min-height hero has none */
-  .pack-stage { flex: none; height: max(260px, calc(100svh - 500px)); }
+  .pack-stage { flex: none; height: max(250px, calc(100svh - 526px)); }
 }
 @media (max-width: 374px) {
   .booking { padding-inline: 14px; }
@@ -364,7 +376,17 @@ main { position: relative; }
 .svc-disc--empty { display: grid; place-items: center; padding: 10px; background: var(--lilac); border: 1.5px dashed rgba(126, 18, 200, .35); box-shadow: none; }
 .svc-disc--empty .gap { font-size: .74rem; line-height: 1.3; }
 .svc h3 { font: 400 .86rem/1.3 var(--display); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 6px; color: var(--plum); }
-.svc p { margin: 0; font-size: .86rem; line-height: 1.45; color: var(--ink-soft); }
+.svc { display: flex; flex-direction: column; align-items: center; }
+.svc p { margin: 0 0 14px; font-size: .86rem; line-height: 1.45; color: var(--ink-soft); }
+.svc-book {
+  margin-top: auto; display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px;
+  border: 1px solid rgba(126, 18, 200, .35); color: var(--violet-deep); text-decoration: none;
+  font: 500 .7rem/1 var(--display); letter-spacing: .22em; text-transform: uppercase;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .16s var(--ease-out);
+}
+.svc-book:active { transform: scale(.96); }
+@media (hover: hover) and (pointer: fine) { .svc-book:hover { background: var(--violet); border-color: var(--violet); color: var(--white); } }
+.work-cta { position: relative; z-index: 2; text-align: center; margin: 40px 0 0; }
 @media (hover: hover) and (pointer: fine) {
   .svc:hover { translate: 0 -6px; box-shadow: 0 26px 44px -28px rgba(34, 16, 58, .55); }
   .svc:hover .svc-disc img { translate: 0 -8px; }
@@ -512,7 +534,47 @@ main { position: relative; }
 .book-lead a { color: var(--white); font-weight: 400; text-underline-offset: 4px; }
 .book-dog { position: absolute; z-index: 1; right: -6px; bottom: -40px; height: 150px; width: auto; filter: drop-shadow(0 14px 20px rgba(0, 0, 0, .4)); }
 .book-lead { min-height: 140px; }
-.form { display: grid; gap: 18px; }
+.form { display: grid; gap: 22px; }
+.fs { border: 0; margin: 0; padding: 0; display: grid; gap: 12px; min-width: 0; }
+.fs legend { padding: 0; margin-bottom: 12px; font: 500 .8rem/1.3 var(--display); letter-spacing: .28em; text-transform: uppercase; color: var(--white); }
+.field-row { display: grid; gap: 12px; }
+.field .label { display: block; font: 500 .74rem/1.4 var(--display); letter-spacing: .26em; text-transform: uppercase; color: var(--lilac); margin-bottom: 8px; }
+.opt { text-transform: none; letter-spacing: .02em; font-weight: 400; color: rgba(239, 230, 255, .78); }
+.field input[type="date"] { color-scheme: dark; }
+/* pill choices: real radio buttons, styled */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip, .field label.chip { position: relative; display: inline-block; margin: 0; font: inherit; letter-spacing: normal; text-transform: none; color: inherit; }
+.chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.chip span {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px;
+  border: 1px solid rgba(239, 230, 255, .5); color: var(--lilac); font: 500 .92rem/1 var(--body);
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .16s var(--ease-out);
+}
+.chip input:checked + span { background: var(--lilac); border-color: var(--lilac); color: var(--plum); }
+.chip input:focus-visible + span { outline: 2px solid var(--lilac); outline-offset: 3px; }
+.chip input:active + span { transform: scale(.96); }
+@media (hover: hover) and (pointer: fine) { .chip:hover span { border-color: var(--white); } }
+.fs[aria-invalid="true"] .chip span { border-color: #FF9C8A; }
+.book-alt { font-size: 1rem !important; }
+@media (min-width: 640px) { .field-row { grid-template-columns: 1fr 1fr; } }
+/* preview of the email she receives, with one-tap confirm */
+.inbox { position: relative; z-index: 2; max-width: 760px; margin: 52px auto 0; }
+.inbox:not([hidden]) { animation: pop-in .6s var(--ease-back); }
+@keyframes pop-in { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
+.inbox-kicker { margin: 0 0 14px; text-align: center; font: 500 .74rem/1.4 var(--display); letter-spacing: .26em; text-transform: uppercase; color: var(--lilac); }
+.mail { background: var(--white); color: var(--ink); border-radius: 12px; padding: 22px 20px; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6); }
+.mail-head { border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 4px; }
+.mail-from { margin: 0 0 4px; font-size: .84rem; color: var(--ink-soft); }
+.mail-subject { margin: 0; font: 600 1.02rem/1.35 var(--body); color: var(--plum); text-wrap: pretty; }
+.mail-rows { margin: 0 0 18px; }
+.mail-rows div { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.mail-rows dt { font: 500 .72rem/1.6 var(--display); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); }
+.mail-rows dd { margin: 0; overflow-wrap: anywhere; }
+.mail-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.mail-actions .btn { flex: 1 1 180px; }
+.btn-ghost-dark { border-color: rgba(34, 16, 58, .3); color: var(--plum); }
+@media (hover: hover) and (pointer: fine) { .btn-ghost-dark:hover { background: var(--lilac); border-color: var(--lilac); } }
+.mail-note { margin: 14px 0 0; font-size: .86rem; color: var(--ink-soft); }
 .field label { display: block; font: 500 .74rem/1.4 var(--display); letter-spacing: .26em; text-transform: uppercase; color: var(--lilac); margin-bottom: 8px; }
 .hint { font-size: .88rem; color: rgba(239, 230, 255, .72); margin: -2px 0 8px; }
 .field input, .field textarea {

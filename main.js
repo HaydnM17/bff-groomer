@@ -406,30 +406,91 @@
   placeEnv(window.scrollY, calm());
   react();
 
-  /* ---------- contact form (preview only) ---------- */
+  /* ---------- booking request (preview only) ----------
+     Checks the request, then shows the email BFF Groomer would receive, with one-tap links to text
+     or email the customer a confirmation and to add the visit to a calendar. On the live site the
+     same details go to /api/contact and land in her inbox. Customer details are only ever written
+     with textContent and encoded into links, never parsed as HTML. */
   var form = doc.getElementById('contact-form');
   if (form) {
     var status = doc.getElementById('form-status');
-    var fields = [
-      { id: 'f-name', err: 'e-name', msg: 'Please add your name.' },
-      { id: 'f-reach', err: 'e-reach', msg: 'Please add a phone number or email.' },
-      { id: 'f-need', err: 'e-need', msg: 'Please say what your pet needs.' }
-    ];
+    var dateIn = doc.getElementById('f-date');
+    var now = new Date();
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    if (dateIn) dateIn.min = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+    var val = function (n) { var el = form.elements[n]; return el && el.value ? String(el.value).trim() : ''; };
+    var pick = function (n) { var c = qs('input[name="' + n + '"]:checked', form); return c ? c.value : ''; };
+    var errs = ['e-name', 'e-reach', 'e-animal', 'e-service', 'e-date'];
+    function fail(errId, msg, target, group) {
+      doc.getElementById(errId).textContent = msg;
+      if (group) group.setAttribute('aria-invalid', 'true');
+      else if (target) target.setAttribute('aria-invalid', 'true');
+      return target;
+    }
+    function niceDate(iso) {
+      var d = new Date(iso + 'T12:00:00');
+      return d.toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' });
+    }
+    function row(dl, label, value) {
+      if (!value) return;
+      var wrap = doc.createElement('div'), dt = doc.createElement('dt'), dd = doc.createElement('dd');
+      dt.textContent = label; dd.textContent = value;
+      wrap.appendChild(dt); wrap.appendChild(dd); dl.appendChild(wrap);
+    }
+    function showInbox(b) {
+      var inbox = doc.getElementById('inbox'), rows = doc.getElementById('mail-rows');
+      var petLabel = b.pet ? b.pet + ' (' + b.animal.toLowerCase() + ')' : b.animal;
+      var when = niceDate(b.date) + ', ' + b.time.toLowerCase();
+      doc.getElementById('mail-subject').textContent = 'New booking request: ' + (b.pet || b.animal) + ', ' + b.service + ', ' + when;
+      rows.textContent = '';
+      row(rows, 'Name', b.name); row(rows, 'Phone', b.phone); row(rows, 'Email', b.email);
+      row(rows, 'Pet', petLabel); row(rows, 'Service', b.service); row(rows, 'When', when); row(rows, 'Notes', b.need);
+      var first = b.name.split(/\s+/)[0];
+      var who = b.pet || 'your ' + b.animal.toLowerCase();
+      var msg = 'Hi ' + first + ', it\'s BFF Groomer. ' + who + ' is booked in for ' + niceDate(b.date) + ' (' + b.time.toLowerCase() +
+        '). Reply here if anything changes. See you then!';
+      var textBtn = doc.getElementById('mail-text'), mailBtn = doc.getElementById('mail-email'), calBtn = doc.getElementById('mail-cal');
+      var digits = b.phone.replace(/[^\d+]/g, '');
+      if (/^\d{10}$/.test(digits)) digits = '+1' + digits;
+      textBtn.hidden = !digits;
+      if (digits) textBtn.href = 'sms:' + digits + '?&body=' + encodeURIComponent(msg);
+      mailBtn.hidden = !b.email;
+      if (b.email) mailBtn.href = 'mailto:' + encodeURIComponent(b.email) + '?subject=' + encodeURIComponent('Your BFF Groomer booking') + '&body=' + encodeURIComponent(msg);
+      var day = b.date.replace(/-/g, ''), next = new Date(b.date + 'T12:00:00');
+      next.setDate(next.getDate() + 1);
+      var end = next.getFullYear() + pad(next.getMonth() + 1) + pad(next.getDate());
+      calBtn.href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent('Groom: ' + petLabel + ', ' + b.name) +
+        '&dates=' + day + '/' + end + '&details=' + encodeURIComponent(b.service + ', ' + b.time.toLowerCase() + '\n' + [b.phone, b.email].filter(Boolean).join(' / ') + (b.need ? '\n' + b.need : ''));
+      inbox.hidden = false;
+      window.scrollTo({ top: inbox.getBoundingClientRect().top + window.scrollY - 100, behavior: calm() ? 'auto' : 'smooth' });
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       status.textContent = '';
       status.removeAttribute('data-state');
-      var firstBad = null;
-      fields.forEach(function (f) {
-        var input = doc.getElementById(f.id);
-        var bad = !input.value.trim();
-        input.setAttribute('aria-invalid', bad ? 'true' : 'false');
-        doc.getElementById(f.err).textContent = bad ? f.msg : '';
-        if (bad && !firstBad) firstBad = input;
-      });
-      if (firstBad) { firstBad.focus(); return; }
+      errs.forEach(function (id) { doc.getElementById(id).textContent = ''; });
+      qsa('[aria-invalid]', form).forEach(function (el) { el.removeAttribute('aria-invalid'); });
+      var b = { name: val('name'), phone: val('phone'), email: val('email'), animal: pick('animal'), pet: val('pet'),
+        service: pick('service'), date: val('date'), time: pick('time') || 'Any time', need: val('need') };
+      var bad = [];
+      if (!b.name) bad.push(fail('e-name', 'Please add your name.', form.elements.name));
+      if (!b.phone && !b.email) bad.push(fail('e-reach', 'Please add a phone number or an email.', form.elements.phone));
+      else if (b.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email)) bad.push(fail('e-reach', 'Please check the email address.', form.elements.email));
+      if (!b.animal) bad.push(fail('e-animal', 'Please choose your pet.', qs('input[name="animal"]', form), doc.getElementById('e-animal').closest('fieldset')));
+      if (!b.service) bad.push(fail('e-service', 'Please choose a service.', qs('input[name="service"]', form), doc.getElementById('e-service').closest('fieldset')));
+      if (!b.date) bad.push(fail('e-date', 'Please pick a day.', dateIn));
+      if (bad.length) { bad[0].focus(); return; }
+      if (form.elements.website && form.elements.website.value) return;
       status.setAttribute('data-state', 'info');
-      status.textContent = 'This is a preview, so nothing was sent. To reach BFF Groomer, text 123-456-7890.';
+      status.textContent = 'Request ready. On the live site this goes straight to BFF Groomer, who texts or emails you to confirm. This preview sends nothing.';
+      showInbox(b);
+    });
+    // "Book this" on a service card picks that service in the form
+    qsa('[data-service]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var r = qs('input[name="service"][value="' + a.getAttribute('data-service') + '"]', form);
+        if (r) r.checked = true;
+      });
     });
   }
 
