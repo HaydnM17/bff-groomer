@@ -277,7 +277,6 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
 .pause-icon { width: 8px; height: 11px; border-inline: 2.5px solid var(--white); }
 .pause[aria-pressed="true"] .pause-icon { width: 0; height: 0; border-inline: 0; border-block: 6px solid transparent; border-left: 10px solid var(--white); translate: 2px 0; }
 .still .pause, .js .pause[hidden] { display: none; }
-.pack-count { margin: 0 0 0 6px; font: 400 .78rem/1 var(--display); letter-spacing: .2em; color: var(--lilac); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 .hero-foot { display: none; }
 
@@ -286,12 +285,16 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
   .hero { min-height: max(720px, 100svh); }
   .hero .lede { display: none; }
   .booking-actions .btn { padding: 14px 10px; letter-spacing: .2em; font-size: .74rem; }
-  .hero h1 { margin-bottom: 8px; }
+  /* one line on phones too, so the whole hero and its controls fit one screen */
+  .hero h1 { font-size: 11vw; letter-spacing: .08em; margin-right: -.08em; white-space: nowrap; margin-bottom: 8px; }
   .hero-tagline { margin-bottom: 16px; }
   /* a size container needs a definite height, and a column flex item inside a min-height hero has none */
-  .pack-stage { flex: none; height: max(280px, calc(100svh - 520px)); }
+  .pack-stage { flex: none; height: max(260px, calc(100svh - 500px)); }
 }
-@media (max-width: 374px) { .booking-actions .btn { padding-inline: 8px; letter-spacing: .12em; } }
+@media (max-width: 374px) {
+  .booking { padding-inline: 14px; }
+  .booking-actions .btn { padding-inline: 6px; letter-spacing: .08em; font-size: .7rem; }
+}
 
 @media (min-width: 900px) {
   .hero-copy {

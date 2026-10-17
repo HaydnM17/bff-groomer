@@ -54,7 +54,7 @@
   /* The ring on the pause button fills over 6.5 s in CSS; its animationend moves on to the next dog.
      Hovering or focusing the pack, or the pause button, holds it. Reduced motion has no ring, so no autoplay. */
   var pack = qs('.pack'), pups = qsa('[data-pup]'), bgs = qsa('[data-bg]');
-  var ring = qs('.pause-ring'), countEl = qs('[data-count]'), live = qs('[data-live]');
+  var ring = qs('.pause-ring'), live = qs('[data-live]');
   var current = 0;
   function load(i) {
     var img = qs('.pup-img', pups[i]);
@@ -77,7 +77,6 @@
     neu.classList.add('is-active'); neu.removeAttribute('aria-hidden');
     bgs.forEach(function (b, n) { b.classList.toggle('is-active', n === next); });
     current = next;
-    if (countEl) countEl.textContent = (next + 1 < 10 ? '0' : '') + (next + 1);
     if (live && announce) live.textContent = neu.getAttribute('aria-label');
     restartRing();
   }
@@ -246,17 +245,8 @@
     if (bookSec) new IntersectionObserver(function (e) { bookIn = e[0].isIntersecting; sync(); }).observe(bookSec);
   }
 
-  /* ---------- hero dog drifts a little slower than the page ---------- */
-  var heroCopy = qs('.hero-copy');
-  function parallax() {
-    if (calm()) return;
-    var y = window.scrollY, h = hero.offsetHeight;
-    if (y > h) return;
-    if (pack) pack.style.translate = '0 ' + (y * 0.16).toFixed(1) + 'px';
-    heroCopy.style.transform = 'translateY(' + (y * -0.08).toFixed(1) + 'px)';
-    heroCopy.style.opacity = String(Math.max(0, 1 - y / (h * 0.8)));
-  }
-  window.addEventListener('scroll', function () { requestAnimationFrame(parallax); }, { passive: true });
+  /* The hero's dogs, buttons and text scroll with the page. Only the background zooms and the
+     circles and bubbles move, so nothing slides under the next section (Haydn, 2026-10-17). */
 
   /* ---------- soap bubbles: a handful rising through every [data-bubbles] section ---------- */
   var bubbleSets = [];
