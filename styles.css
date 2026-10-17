@@ -229,7 +229,7 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
   transition: text-decoration-color .25s ease;
 }
 .booking-number:hover { text-decoration-color: rgba(239, 230, 255, .7); }
-.booking-title { margin: 0 0 6px; font: 300 clamp(1.6rem, 6.6vw, 2.3rem)/1.15 var(--display); color: var(--white); letter-spacing: .02em; }
+.booking-title { margin: 0 0 2px; font: 400 clamp(1.15rem, 4.8vw, 1.5rem)/1.2 var(--display); color: var(--white); letter-spacing: .02em; }
 .booking-note { margin: 0 0 14px; font-size: .92rem; color: rgba(255, 255, 255, .92); }
 .booking-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .booking-phone { margin: 12px 0 0; font-size: .95rem; color: var(--lilac); }
