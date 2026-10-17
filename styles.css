@@ -232,6 +232,8 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
 .booking-title { margin: 0 0 6px; font: 300 clamp(1.6rem, 6.6vw, 2.3rem)/1.15 var(--display); color: var(--white); letter-spacing: .02em; }
 .booking-note { margin: 0 0 14px; font-size: .92rem; color: rgba(255, 255, 255, .92); }
 .booking-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.booking-phone { margin: 12px 0 0; font-size: .95rem; color: var(--lilac); }
+.booking-phone a { color: var(--white); font-weight: 600; letter-spacing: .03em; font-variant-numeric: tabular-nums; text-underline-offset: 4px; }
 
 /* ---------- the pack: sticker dogs that rock, each with a swinging name tag ---------- */
 .pack { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; min-height: 320px; margin: 22px var(--pad) 14px; }
@@ -306,7 +308,7 @@ h1, h2, h3 { margin: 0; font-weight: 300; text-wrap: balance; }
   .hero h1 { font-size: 11vw; letter-spacing: .08em; margin-right: -.08em; white-space: nowrap; margin-bottom: 8px; }
   .hero-tagline { margin-bottom: 16px; }
   /* a size container needs a definite height, and a column flex item inside a min-height hero has none */
-  .pack-stage { flex: none; height: max(250px, calc(100svh - 526px)); }
+  .pack-stage { flex: none; height: max(240px, calc(100svh - 558px)); }
 }
 @media (max-width: 374px) {
   .booking { padding-inline: 14px; }
